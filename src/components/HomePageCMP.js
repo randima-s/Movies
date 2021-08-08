@@ -7,7 +7,7 @@ function HomePageCMP(props){
 
     const handleSearch=(movieName)=>{
         console.log(movieName);
-        history.push("/results");
+        history.push("/results"+movieName);
     }
 
 
@@ -16,10 +16,10 @@ function HomePageCMP(props){
         <div className="row home-search-background align-items-center " >
             <div className="row justify-content-center">
                 <div className="col-10 col-lg-4 col-md-6 col-sm-8 text-light home-search-container">
-                    <h2 className="text-center mx-2 mb-0">Welocome</h2>
+                    <h4 className="text-center mx-2 mb-0">Welocome</h4>
                     <h1 className="text-center mx-2">Movies Directory</h1>
                     <SearchCMP handleSearch={handleSearch}/>
-                    <p className="m-0 text-center"><span className="text-primary">Sign in</span> for recommendations</p>
+                    <p className="m-0 text-center"><span className="text-primary" style={{cursor:"pointer"}}>Sign in</span> for recommendations</p>
                 </div>
             </div>
         </div>
