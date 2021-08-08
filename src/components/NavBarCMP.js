@@ -1,5 +1,5 @@
 import {Link} from "react-router-dom";
-import {Navbar,Nav} from "react-bootstrap";
+import {signOut} from "../firebase/firebaseAuth";
 import {useState} from "react";
 import LoginModal from "./LoginModal";
 
@@ -20,12 +20,12 @@ function NavBarCMP(props){
                     {props.user.user&&<span className="text-light ms-2">{props.user.user.displayName}</span>}
                     {props.user.isLoggedIn?(
                         <div>
-                        <Link to="/mymovies" className="navbar-link me-1" >My Movies</Link>
-                        <span className="text-primary" onClick={toggleModal}>Log Out</span>
+                        <Link to="/mymovies" className="navbar-link me-1 text-warning" >My Movies</Link>
+                        <span className="text-primary" onClick={signOut} style={{cursor:"pointer"}}>Log Out</span>
                         </div>
                     ):(
                         <div>
-                        <span className="text-primary" onClick={toggleModal}>Log In</span>
+                        <span className="text-primary" onClick={toggleModal} style={{cursor:"pointer"}}>Log In</span>
                         </div>
                     )}
                     

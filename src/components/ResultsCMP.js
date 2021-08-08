@@ -11,9 +11,9 @@ function ResultsCMP(props){
     });
 
     useEffect(()=>{
-        console.log(props.movieName);
-        if(props.movieName){
-            handleSearch(props.movieName);
+        console.log(props.searchName);
+        if(props.searchName){
+            handleSearch(props.searchName);
         }
     },[props.movieName]);
 
@@ -27,9 +27,10 @@ function ResultsCMP(props){
         searchMovies(movieName)
         .then((movies)=>{
             console.log(movies);
+            const modifiedResults= injectUserCollectionData(movies.results);
             setResultsState({
                 isLoading:false,
-                results:movies.results,
+                results:modifiedResults,
                 error:null
             });
         })
@@ -43,6 +44,21 @@ function ResultsCMP(props){
         });
     }
 
+    //should be moved to backend
+    const injectUserCollectionData=(searchResults)=>{
+        if(props.user.isLoggedIn && !props.movies.isLoading && !props.movies.error){
+            console.log("modifying");
+            const modifiedResults=searchResults.map((movie)=>{
+                return props.movies.movies.find((userMovie)=>userMovie.id===movie.id)||movie;
+            });
+            console.log(modifiedResults);
+            return modifiedResults;
+        }
+        else{
+            return searchResults;
+        }
+    }
+
     return(
         <div>
             <div className="movies-nav-filler">
@@ -54,7 +70,15 @@ function ResultsCMP(props){
                 <SearchCMP handleSearch={handleSearch}/>
                 </div>
                 <div className="text-light results-grid">
-                <ResultGridCMP isLoading={resultsState.isLoading} error={resultsState.error} results={resultsState.results}/>
+                <ResultGridCMP 
+                    isLoading={resultsState.isLoading} 
+                    error={resultsState.error} 
+                    results={resultsState.results} 
+                    user={props.user}
+                    addMovie={props.addMovie}
+                    removeMovie={props.removeMovie}
+                    updateMovie={props.updateMovie}
+                />
                 </div>
             </div>
             

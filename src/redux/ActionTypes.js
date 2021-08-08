@@ -1,1 +1,7 @@
 export const UPDATE_USER="UPDATE_USER";
+export const MOVIE_LOADING="MOVIE_LOADING";
+export const MOVIE_LOAD="MOVIE_LOAD";
+export const MOVIE_ADD="MOVIE_ADD";
+export const MOVIE_ERROR="MOVIE_ERROR";
+export const MOVIE_REMOVE="MOVIE_REMOVE";
+export const MOVIE_UPDATE="MOVIE_UPDATE";

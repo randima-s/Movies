@@ -1,6 +1,7 @@
 
 import {useState, useEffect } from "react";
 import { getMovieDetails } from "../requests/getMovieDetails";
+import {addData,deleteData,updateRating} from "../firebase/fireStore";
 
 const MovieDetailsCMP =function(props){
 
@@ -41,6 +42,50 @@ const MovieDetailsCMP =function(props){
         });
     }
 
+    const addToCollection=()=>{
+        const newItem={
+            rating:1,
+            id:props.movieID,
+            resultType:"Title",
+            image:props.image,
+            title:props.title,
+            description:props.description
+        };
+
+        addData(props.user.user.uid,newItem)
+        .then((docRefId)=>{
+            newItem.firestoreID=docRefId;
+            props.addMovie(newItem);
+            //props.updateComments(newCommentJSON);
+        })
+        .catch((error)=>{
+            console.log(error);
+        });
+    }
+
+    const removeFromCollection=()=>{
+        console.log(props.firestoreID);
+        deleteData(props.user.user.uid,props.firestoreID)
+        .then(()=>{
+            console.log("success");
+            props.removeMovie(props.firestoreID);
+        })
+        .catch((error)=>{
+            console.log(error);
+        });
+    }
+
+    const updateMovieRating=(newRating)=>{
+        updateRating(props.user.user.uid,props.firestoreID,newRating)
+        .then(()=>{
+            console.log("success");
+            props.updateMovie(props.firestoreID,newRating);
+        })
+        .catch((error)=>{
+            console.log(error);
+        });
+    }
+
     
     if(resultsState.isLoading){
         return(
@@ -76,12 +121,25 @@ const MovieDetailsCMP =function(props){
         });
 
         return(
-            <div className="col-12 " key={props.movieID}>
+            <div className="col-12 justify-content-center" key={props.movieID}>
                 <div className="text-end"><span className="badge bg-danger" style={{cursor:"pointer"}} onClick={props.handleClose}>X</span></div>
                 <div className="movie-details">
                 <h4 className="text-center">{props.title}</h4>
                 <p className="text-center">{genres}</p>
                 <p className="text-center" style={{color:"#EDC01F"}}>{resultsState.details.awards}</p>
+
+                {props.user.isLoggedIn && (
+                    <div className="mx-auto mb-2">
+                        {props.rating===0?(
+                        <p className="text-center mb-0" onClick={addToCollection}>Add to favourites</p>
+                        ):(
+                        <p className="text-center mb-0" onClick={removeFromCollection}>Remove from favourites</p>
+                        )
+                        }
+                        <p className="text-center mb-0 mt-4" onClick={()=>updateMovieRating(4)}>Rating {props.rating}</p>
+                    </div>
+                )}
+
                 <div className="row">
                     <div className="col-md-4">
                         <img src={props.image} alt={props.title} className="w-100"/>
@@ -121,6 +179,7 @@ const MovieDetailsCMP =function(props){
                                 </tbody>
                             </table>
                         </div>
+
                     </div>
                     <h4 className="mt-4">Cast</h4>
                     <hr/>

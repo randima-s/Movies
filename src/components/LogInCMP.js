@@ -34,6 +34,7 @@ function LogInCMP(props){
             signIn(userEmail,passWord)
             .then((user)=>{
                 console.log(user);
+                //fetchData
             })
             .catch((error)=>{
                 setLoginError(error);

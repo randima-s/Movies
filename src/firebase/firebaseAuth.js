@@ -1,5 +1,5 @@
 import {auth} from "./firebase";
-import { updateUser } from "../redux/ActionCreators";
+import { updateUser,fetchMovies } from "../redux/ActionCreators";
 import {store} from "../redux/ConfigureStore";
 
 export const  addUser=(email,password)=>{
@@ -60,6 +60,7 @@ auth.onAuthStateChanged((user)=>{
             user:user,
             error:null
         }));
+        store.dispatch(fetchMovies(user.uid));
     }
     else{
         store.dispatch(updateUser({
