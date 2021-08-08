@@ -1,5 +1,9 @@
-.App {
+body {
   background-color: black;
+}
+
+a {
+  text-decoration: none;
 }
 
 .home-search-background {

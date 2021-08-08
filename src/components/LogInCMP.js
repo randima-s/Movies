@@ -1,7 +1,7 @@
 
 import {useState} from "react";
 
-//import {signIn} from "../firebase/auth";
+import {signIn} from "../firebase/firebaseAuth";
 
 function LogInCMP(props){
 
@@ -31,13 +31,13 @@ function LogInCMP(props){
 
     const handleSubmit=(event)=>{
         if(!userEmailError && !passWordError ){
-            /*signIn(userEmail,passWord)
+            signIn(userEmail,passWord)
             .then((user)=>{
                 console.log(user);
             })
             .catch((error)=>{
                 setLoginError(error);
-            });*/
+            });
             props.modalHide();
         }
         event.preventDefault();

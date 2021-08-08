@@ -7,7 +7,7 @@ function MyMoviesCMP(props){
         </div>
         <div className="container">
             <div>
-                <h1 className="text-center">Randima</h1>
+                <h1 className="text-center">{props.user.user.displayName}</h1>
             </div>
             <div>
                 Recommendations

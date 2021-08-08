@@ -17,8 +17,19 @@ function NavBarCMP(props){
             <nav className="navbar navbar-expand-lg  ">
                 <div >
                     <a className="navbar-brand text-light mx-auto fs-2" href="#">Movies Directory</a>
-                    <Link to="/mymovies" className="navbar-link ms-4" >My Movies</Link>
-                    <span className="text-primary" onClick={toggleModal}>Log In</span>
+                    {props.user.user&&<span className="text-light ms-2">{props.user.user.displayName}</span>}
+                    {props.user.isLoggedIn?(
+                        <div>
+                        <Link to="/mymovies" className="navbar-link me-1" >My Movies</Link>
+                        <span className="text-primary" onClick={toggleModal}>Log Out</span>
+                        </div>
+                    ):(
+                        <div>
+                        <span className="text-primary" onClick={toggleModal}>Log In</span>
+                        </div>
+                    )}
+                    
+                    
                 </div>
             </nav>
             <LoginModal show={modalShow} modalHide={toggleModal}/>

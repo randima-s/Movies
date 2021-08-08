@@ -19,7 +19,7 @@ function HomePageCMP(props){
                     <h4 className="text-center mx-2 mb-0">Welocome</h4>
                     <h1 className="text-center mx-2">Movies Directory</h1>
                     <SearchCMP handleSearch={handleSearch}/>
-                    <p className="m-0 text-center"><span className="text-primary" style={{cursor:"pointer"}}>Sign in</span> for recommendations</p>
+                    {!props.isLoggedIn && <p className="m-0 text-center"><span className="text-primary" >Log in</span> for recommendations</p>}
                 </div>
             </div>
         </div>

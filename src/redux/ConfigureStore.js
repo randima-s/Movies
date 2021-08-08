@@ -1,8 +1,8 @@
 import {createStore,combineReducers,applyMiddleware} from "redux";
+import {User} from "./reducerUser";
+import thunk  from "redux-thunk";
+import {logger} from "redux-logger";
 
 export const store=createStore(combineReducers({
-    images:Images,
-    blogs:Blogs,
-    comments:Comments,
     user:User
 }),applyMiddleware(thunk,logger));

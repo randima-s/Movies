@@ -1,3 +1,1 @@
-export const RESULTS_LOADING="RESULTS_LOADING";
-export const RESULTS_ADD="RESULTS_ADD";
-export const RESULTS_ERROR="RESULTS_ERROR";
+export const UPDATE_USER="UPDATE_USER";

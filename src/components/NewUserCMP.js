@@ -1,7 +1,7 @@
 //import {baseURL} from "../shared/baseUrl";
 import {useState} from "react";
 
-//import {addUser,updateUserName} from "../firebase/auth";
+import {addUser,updateUserName} from "../firebase/firebaseAuth";
 
 function NewUserCMP(props){
 
@@ -44,7 +44,7 @@ function NewUserCMP(props){
 
     const handleSubmit=(event)=>{
         if(!userEmailError && !passWordError && !passWordErrorVerify){
-            /*addUser(userEmail,passWord)
+            addUser(userEmail,passWord)
             .then(()=>{
                 console.log("user");
                 return updateUserName(userName);
@@ -54,7 +54,7 @@ function NewUserCMP(props){
             })
             .catch((error)=>{
                 setAccountError(error);
-            });*/
+            });
             props.modalHide();
         }
         event.preventDefault();
