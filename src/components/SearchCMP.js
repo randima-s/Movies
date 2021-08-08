@@ -16,9 +16,13 @@ function SearchCMP(props){
 
     return(
         <div>
-            <div className="input-group mb-2">
-            <input type="text" className={error?"form-control m-2 border-2 border-danger":"form-control m-2"} placeholder="Movie Name" ref={movieName}/>
-            <button type="submit" className="btn btn-primary m-2" onClick={handleSearch}>Search</button>
+            <div className="row input-group mb-2 justify-content-center">
+                <div className="col-md-9 mb-2">
+                <input type="text" className={error?"form-control  border-2 border-danger":"form-control "} placeholder="Movie Name" ref={movieName}/>
+                </div>
+                <div className="col-auto mb-2">
+                <button type="submit" className="btn btn-primary " onClick={handleSearch}>Search</button>
+                </div>
             </div>
         </div>
     );

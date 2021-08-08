@@ -15,7 +15,7 @@ function ResultsCMP(props){
         if(props.searchName){
             handleSearch(props.searchName);
         }
-    },[props.movieName]);
+    },[props.searchName]);
 
     const handleSearch=(movieName)=>{
         //console.log(movieName);

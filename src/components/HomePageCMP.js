@@ -7,7 +7,9 @@ function HomePageCMP(props){
 
     const handleSearch=(movieName)=>{
         console.log(movieName);
-        history.push("/results"+movieName);
+        props.setSearchName(movieName);
+        history.push("/results");
+        //history.push("/results"+movieName);
     }
 
 
@@ -22,9 +24,6 @@ function HomePageCMP(props){
                     {!props.isLoggedIn && <p className="m-0 text-center"><span className="text-primary" >Log in</span> for recommendations</p>}
                 </div>
             </div>
-        </div>
-        <div>
-            Recent
         </div>
         </div>
     );

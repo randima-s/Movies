@@ -20,32 +20,43 @@ const mapDispatchToProps=dispatch=>({
     updateMovie:(firestoreID,newRating)=>dispatch(updateMovie(firestoreID,newRating))
 })
 class MainCMP extends Component{
+    constructor(props){
+        super(props);
+        this.state={
+            searchName:""
+        }
+    }
 
     componentDidMount(){
         console.log("mounted");
-        //getMost Popular
-        //getComingSoon
+        document.title="Movies Directory"
     }
 
-    //logInState();
+    setSearchName=(searchName)=>{
+        this.setState({searchName:searchName});
+    }
+
+    //modify search using router parameters
+    //enter to search
 
     render(){
         return(
             <div>
                 <NavBarCMP user={this.props.user}/>
                 <Switch>
-                    <Route exact path="/" component={()=><HomePageCMP isLoggedIn={this.props.user.isLoggedIn}/>}/>
-                    <Route path ="/mymovies" component={()=><MyMoviesCMP user={this.props.user} movies={this.props.movies}
+                    <Route exact path="/" component={()=><HomePageCMP isLoggedIn={this.props.user.isLoggedIn} setSearchName={this.setSearchName}/>}/>
+                    {this.props.user.isLoggedIn &&<Route path ="/mymovies" component={()=><MyMoviesCMP user={this.props.user} movies={this.props.movies}
                     addMovie={this.props.addMovie}
                     removeMovie={this.props.removeMovie}
-                    updateMovie={this.props.updateMovie}/>}></Route>
-                    <Route  path="/results:searchName" component={({match})=><ResultsCMP 
-                    searchName={match.params.searchName} 
+                    updateMovie={this.props.updateMovie}/>}></Route>}
+                    <Route  path="/results" component={({match})=><ResultsCMP 
+                    searchName={this.state.searchName} 
                     user={this.props.user}
                     addMovie={this.props.addMovie}
                     removeMovie={this.props.removeMovie}
                     updateMovie={this.props.updateMovie}
                     movies={this.props.movies}/>}/>
+                    <Redirect to="/"/>
                 </Switch>
             </div>
         );

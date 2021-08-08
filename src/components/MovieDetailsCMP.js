@@ -76,14 +76,15 @@ const MovieDetailsCMP =function(props){
     }
 
     const updateMovieRating=(newRating)=>{
-        updateRating(props.user.user.uid,props.firestoreID,newRating)
+        console.log("not available");
+        /*updateRating(props.user.user.uid,props.firestoreID,newRating)
         .then(()=>{
             console.log("success");
             props.updateMovie(props.firestoreID,newRating);
         })
         .catch((error)=>{
             console.log(error);
-        });
+        });*/
     }
 
     

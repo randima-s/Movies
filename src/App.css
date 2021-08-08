@@ -17,13 +17,26 @@ a {
   background-color: black;
   border-radius: 1rem;
   padding: 1rem;
-  border: solid #0d6efd 1px;
-  box-shadow: 0px 4px 10px #0d6efd;
+  box-shadow: 0px 0px 10px 4px #0d6efd;
+  animation: dropin 8s ease forwards infinite;
 }
 
-.home-search-container:hover {
-  transition: box-shadow 400ms ease;
-  box-shadow: 0px 10px 16px #0d6efd;
+@keyframes dropin {
+  20% {
+    box-shadow: 0px 0px 7px 4px #c43fd8f1;
+  }
+  40% {
+    box-shadow: 0px 0px 7px 4px #f00c35;
+  }
+  60% {
+    box-shadow: 0px 0px 10px 4px #110cf0;
+  }
+  80% {
+    box-shadow: 0px 0px 7px 4px #0cf083;
+  }
+  100% {
+    box-shadow: 0px 0px 10px 4px #0d6efd;
+  }
 }
 
 .movies-nav-bar {
@@ -56,4 +69,11 @@ a {
 }
 .cast-grid-item:hover {
   border: solid #0d6efd 1px;
+}
+
+/*Empty box*/
+.empty-box {
+  min-height: 4rem;
+  padding: 1rem;
+  background-color: #997404;
 }

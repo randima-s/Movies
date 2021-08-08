@@ -1,4 +1,4 @@
-import {useEffect} from "react";
+
 import ResultGridCMP from "./ResultGridCMP";
 
 function MyMoviesCMP(props){
@@ -27,11 +27,16 @@ function MyMoviesCMP(props){
                 <div>
                     <h1 className="text-center">{props.user.user.displayName}</h1>
                 </div>
-                <div>
-                    Recommendations
+                <div className="mb-4">
+                    <h4 className="text-warning">Recommendations</h4>
+                    <hr/>
+                    <div className="empty-box">
+                        Keep adding movies to get Recommendations
+                    </div>
                 </div>
                 <div>
-                    My Movie Collection
+                    <h4>My Movie Collection</h4>
+                    <hr/>
                     <ResultGridCMP 
                     isLoading={props.movies.isLoading} 
                     error={props.movies.error} 

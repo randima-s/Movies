@@ -16,7 +16,7 @@ function NavBarCMP(props){
         <div className="movies-nav-bar w-100">
             <nav className="navbar navbar-expand-lg  ">
                 <div >
-                    <a className="navbar-brand text-light mx-auto fs-2" href="#">Movies Directory</a>
+                    <Link className="navbar-brand text-light mx-auto fs-2" to="/">Movies Directory</Link>
                     {props.user.user&&<span className="text-light ms-2">{props.user.user.displayName}</span>}
                     {props.user.isLoggedIn?(
                         <div>

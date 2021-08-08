@@ -1,8 +1,8 @@
 import {sampleDetails} from "../sampleData/details"
-const API_key="k_4quk8cra";
+import { API_key } from "./API_key";
 
 export const getMovieDetails=function(movieID){
-    /*return new Promise((resolve,reject)=>{
+    return new Promise((resolve,reject)=>{
         fetch("https://imdb-api.com/en/API/title/"+API_key+"/"+movieID)
         .then((response)=>{
             console.log(response)
@@ -20,7 +20,7 @@ export const getMovieDetails=function(movieID){
         .catch((error)=>{
             reject(error);
         });
-    });*/
+    });
     return new Promise((resolve,reject)=>{
         resolve(sampleDetails);
     }

@@ -23,4 +23,5 @@ yarn-debug.log*
 yarn-error.log*
 
 sampleData
-firebase/config.js
+src/firebase/config.js
+src/requests/API_key.js
