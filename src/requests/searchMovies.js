@@ -2,7 +2,7 @@ import {sampleResult} from "../sampleData/inception"
 import { API_key } from "./API_key";
 
 export const searchMovies=function(movieName){
-    return new Promise((resolve,reject)=>{
+    /*return new Promise((resolve,reject)=>{
         fetch("https://imdb-api.com/en/API/Search/"+API_key+"/"+movieName)
         .then((response)=>{
             console.log(response)
@@ -20,7 +20,7 @@ export const searchMovies=function(movieName){
         .catch((error)=>{
             reject(error);
         });
-    });
+    });*/
     return new Promise((resolve,reject)=>{
         resolve(sampleResult);
     }

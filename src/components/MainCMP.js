@@ -44,6 +44,8 @@ class MainCMP extends Component{
     }
 
     //enter to search
+    //Color change pagination
+    //Move pagination to MovieDetails
 
     render(){
         return(

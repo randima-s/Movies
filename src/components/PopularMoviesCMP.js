@@ -8,7 +8,7 @@ function PopularMoviesCMP(props){
         results:[],
         error:null
     });
-    const [currentPage,setCurrentPage]=useState(1);
+    const [currentPage,setCurrentPage]=useState(0);
     const [pageCount,setPageCount]=useState(1);
     const [allResults,setAllResults]=useState([]);
 
@@ -19,7 +19,8 @@ function PopularMoviesCMP(props){
         console.log("loaded");
         update();
     },[]);
-    useEffect(()=>{
+    
+    /*useEffect(()=>{
         setResultsState({
             isLoading:false,
             results:allResults.slice(8*(currentPage-1),8*currentPage),
@@ -31,12 +32,8 @@ function PopularMoviesCMP(props){
         const modifiedResults= injectUserCollectionData(results);
         setAllResults(modifiedResults);
         setPageCount(Math.ceil(modifiedResults.length/8));
-        setResultsState({
-            isLoading:false,
-            results:modifiedResults.slice(8*(currentPage-1),8*currentPage),
-            error:null
-        });
-    }
+        setCurrentPage(1);
+    }*/
 
     const update=()=>{
         //console.log(movieName);
@@ -48,7 +45,13 @@ function PopularMoviesCMP(props){
         getMostPopular()
         .then((movies)=>{
             console.log(movies);
-            handleResults(movies.items);
+            //handleResults(movies.items);
+            const modifiedResults= injectUserCollectionData(movies.items);
+            setResultsState({
+                isLoading:false,
+                results:modifiedResults,
+                error:null
+            });
         })
         .catch((error)=>{
             console.log(error);
@@ -75,7 +78,7 @@ function PopularMoviesCMP(props){
         }
     }
 
-    const paginationPages=(pageCount)=>{
+    /*const paginationPages=(pageCount)=>{
         const paginationArr=Array(pageCount);
         for(let i=0;i<pageCount;i++){
             paginationArr[i]=<li className={currentPage===i+1?"page-item active":"page-item"} key={i+1}><span className="page-link bg-dark text-light border-warning cursor-pointer" onClick={()=>setCurrentPage(i+1)}>{i+1}</span></li>;
@@ -93,7 +96,7 @@ function PopularMoviesCMP(props){
         if(currentPage>1){
             setCurrentPage(currentPage-1);
         }
-    }
+    }*/
 
     return(
         <div>
@@ -105,21 +108,6 @@ function PopularMoviesCMP(props){
                 <h1 className="category-heading">
                 Most Popular Movies
                 </h1>
-                <nav >
-                    <ul className="pagination justify-content-center border-warning cursor-pointer">
-                        <li className={currentPage===1?"page-item disabled":"page-item"}>
-                        <span className="page-link bg-dark text-light border-warning" href="#" aria-label="Previous" onClick={decPage}>
-                            <span aria-hidden="true">&laquo;</span>
-                        </span>
-                        </li>
-                        {paginationPages(pageCount)}
-                        <li className={currentPage===pageCount?"page-item disabled":"page-item"}>
-                        <span className="page-link bg-dark text-light border-warning cursor-pointer" href="#" aria-label="Next" onClick={incPage}>
-                            <span aria-hidden="true">&raquo;</span>
-                        </span>
-                        </li>
-                    </ul>
-                </nav>
                 <ResultGridCMP 
                     isLoading={resultsState.isLoading} 
                     error={resultsState.error} 
@@ -131,21 +119,6 @@ function PopularMoviesCMP(props){
                     updateMovie={props.updateMovie}
                 />
                 </div>
-                <nav >
-                    <ul className="pagination justify-content-center border-warning cursor-pointer">
-                        <li className={currentPage===1?"page-item disabled":"page-item"}>
-                        <span className="page-link bg-dark text-light border-warning" href="#" aria-label="Previous" onClick={decPage}>
-                            <span aria-hidden="true">&laquo;</span>
-                        </span>
-                        </li>
-                        {paginationPages(pageCount)}
-                        <li className={currentPage===pageCount?"page-item disabled":"page-item"}>
-                        <span className="page-link bg-dark text-light border-warning cursor-pointer" href="#" aria-label="Next" onClick={incPage}>
-                            <span aria-hidden="true">&raquo;</span>
-                        </span>
-                        </li>
-                    </ul>
-                </nav>
             </div>
             
         </div>
