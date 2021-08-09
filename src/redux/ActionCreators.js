@@ -1,5 +1,6 @@
 import * as ActionTypes from "./ActionTypes";
 import {readData} from "../firebase/fireStore";
+import {getMostPopular} from "../requests/getMostPopular";
 
 /////////User
 export const updateUser=(user)=>{
@@ -60,6 +61,40 @@ export const updateMovie=(firestoreID,newRating)=>{
 export const errorMovies=(error)=>{
     return({
         type:ActionTypes.MOVIE_ERROR,
+        payload:error
+    });
+}
+
+//////////////Popular
+export const fetchPopular=()=>dispatch=>{
+    //const blogs=[];
+    dispatch(loadingPopular());
+    getMostPopular()
+    .then((movies)=>{
+        dispatch(loadPopular(movies.items))
+    })
+    .catch(error=>{
+        console.log("Error: "+error);
+        dispatch(errorPopular(error));
+    });
+}
+
+export const loadingPopular=()=>{
+    return({
+        type:ActionTypes.POPULAR_LOADING,
+    });
+}
+
+export const loadPopular=(movies)=>{
+    return({
+        type:ActionTypes.POPULAR_LOAD,
+        payload:movies
+    });
+}
+
+export const errorPopular=(error)=>{
+    return({
+        type:ActionTypes.POPULAR_ERROR,
         payload:error
     });
 }

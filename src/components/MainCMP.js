@@ -6,20 +6,22 @@ import HomePageCMP from "./HomePageCMP";
 import ResultsCMP from "./ResultsCMP";
 import MyMoviesCMP from "./MyMoviesCMP";
 import LoginModal from "./LoginModal";
-import { addMovie,removeMovie,updateMovie } from "../redux/ActionCreators";
+import { addMovie,removeMovie,updateMovie,fetchPopular } from "../redux/ActionCreators";
 
 
 const mapStateToProps = state => {
     return {
         user:state.user,
-        movies:state.movies
+        movies:state.movies,
+        popular:state.popular
     }
 }
 
 const mapDispatchToProps=dispatch=>({
     addMovie:(movie)=>dispatch(addMovie(movie)),
     removeMovie:(firestoreID)=>dispatch(removeMovie(firestoreID)),
-    updateMovie:(firestoreID,newRating)=>dispatch(updateMovie(firestoreID,newRating))
+    updateMovie:(firestoreID,newRating)=>dispatch(updateMovie(firestoreID,newRating)),
+    fetchPopular:()=>dispatch(fetchPopular())
 })
 class MainCMP extends Component{
     constructor(props){
@@ -33,6 +35,7 @@ class MainCMP extends Component{
     componentDidMount(){
         console.log("mounted");
         document.title="Movies Directory"
+        this.props.fetchPopular();
     }
 
     setSearchName=(searchName)=>{
@@ -45,7 +48,6 @@ class MainCMP extends Component{
 
     //enter to search
     //Color change pagination
-    //Move pagination to MovieDetails
 
     render(){
         return(
@@ -58,14 +60,14 @@ class MainCMP extends Component{
                         addMovie={this.props.addMovie}
                         removeMovie={this.props.removeMovie}
                         updateMovie={this.props.updateMovie}
-                        movies={this.props.movies}/>}/>
+                        movies={this.props.movies}
+                        popular={this.props.popular}/>}/>
                     {this.props.user.isLoggedIn &&<Route path ="/mymovies" component={()=><MyMoviesCMP user={this.props.user} movies={this.props.movies}
                         addMovie={this.props.addMovie}
                         removeMovie={this.props.removeMovie}
                         updateMovie={this.props.updateMovie}/>}></Route>}
                     <Route  path="/results:movieName" component={({match})=><ResultsCMP 
                         searchName={match.params.movieName} 
-                        setSearchName={this.setSearchName}
                         user={this.props.user}
                         addMovie={this.props.addMovie}
                         removeMovie={this.props.removeMovie}

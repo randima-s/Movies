@@ -72,13 +72,13 @@ function ResultGridCMP(props){
                     <div className="col-12 col-lg-3 co-md-4 col-sm-6 p-2 " key={result.id} onClick={()=>setSelectedMovie(result.id)}>
                         <div className="results-grid-item p-2">
                         <span className="position-relative pt-2">
-                            {result.title}
+                            {result.title} 
                             {result.rating && 
-                            <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                            Liked</span>
+                            <span className=" badge rounded-pill bg-danger ms-1">
+                             Liked</span>
                             }
                         </span>
-                        <p className="text-secondary">{result.description}</p>
+                        <p className="text-secondary">{result.description|| result.title}</p>
                         <img src={result.image} alt={result.title} className="w-100"/>
                         </div>
                     </div>

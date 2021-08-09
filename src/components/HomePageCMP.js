@@ -30,7 +30,8 @@ function HomePageCMP(props){
             </div>
         </div>
         <div ref={popularMoviesRef}>
-            <PopularMoviesCMP 
+            <PopularMoviesCMP
+            popular={props.popular} 
             user={props.user}
             movies={props.movies}
             addMovie={props.addMovie}

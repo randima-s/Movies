@@ -5,3 +5,6 @@ export const MOVIE_ADD="MOVIE_ADD";
 export const MOVIE_ERROR="MOVIE_ERROR";
 export const MOVIE_REMOVE="MOVIE_REMOVE";
 export const MOVIE_UPDATE="MOVIE_UPDATE";
+export const POPULAR_LOADING="POPULAR_LOADING";
+export const POPULAR_LOAD="POPULAR_LOAD";
+export const POPULAR_ERROR="POPULAR_ERROR";

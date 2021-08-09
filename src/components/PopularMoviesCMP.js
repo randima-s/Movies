@@ -3,22 +3,26 @@ import ResultGridCMP from "./ResultGridCMP";
 import {getMostPopular} from "../requests/getMostPopular";
 
 function PopularMoviesCMP(props){
-    const [resultsState,setResultsState]=useState({
+
+    useEffect(()=>{
+        injectUserCollectionData(props.popular.movies);
+    },[props.movies.movies,props.popular.movies]);
+    /*const [resultsState,setResultsState]=useState({
         isLoading:true,
         results:[],
         error:null
     });
     const [currentPage,setCurrentPage]=useState(0);
-    const [pageCount,setPageCount]=useState(1);
-    const [allResults,setAllResults]=useState([]);
+    const [pageCount,setPageCount]=useState(1);*/
+    const [modifiedResults,setModifiedResults]=useState([]);
 
     //let allResults=[];
     //let totalPages=1;
 
-    useEffect(()=>{
+    /*useEffect(()=>{
         console.log("loaded");
         update();
-    },[]);
+    },[]);*/
     
     /*useEffect(()=>{
         setResultsState({
@@ -35,7 +39,7 @@ function PopularMoviesCMP(props){
         setCurrentPage(1);
     }*/
 
-    const update=()=>{
+    /*const update=()=>{
         //console.log(movieName);
         setResultsState({
             isLoading:true,
@@ -61,20 +65,20 @@ function PopularMoviesCMP(props){
                 error:error
             });
         });
-    }
+    }*/
 
     //should be moved to backend
-    const injectUserCollectionData=(searchResults)=>{
+    const injectUserCollectionData=(popularMovies)=>{
         if(props.user.isLoggedIn && !props.movies.isLoading && !props.movies.error){
             console.log("modifying");
-            const modifiedResults=searchResults.map((movie)=>{
+            const modifiedResults=popularMovies.map((movie)=>{
                 return props.movies.movies.find((userMovie)=>userMovie.id===movie.id)||movie;
             });
             console.log(modifiedResults);
-            return modifiedResults;
+            setModifiedResults(modifiedResults);
         }
         else{
-            return searchResults;
+            setModifiedResults(popularMovies);
         }
     }
 
@@ -109,11 +113,10 @@ function PopularMoviesCMP(props){
                 Most Popular Movies
                 </h1>
                 <ResultGridCMP 
-                    isLoading={resultsState.isLoading} 
-                    error={resultsState.error} 
-                    results={resultsState.results} 
+                    isLoading={props.popular.isLoading} 
+                    error={props.popular.error} 
+                    results={modifiedResults} 
                     user={props.user}
-                    movies={props.movies}
                     addMovie={props.addMovie}
                     removeMovie={props.removeMovie}
                     updateMovie={props.updateMovie}

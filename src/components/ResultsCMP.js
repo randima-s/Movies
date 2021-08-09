@@ -21,7 +21,7 @@ function ResultsCMP(props){
     },[props.searchName]);
 
     const search=(movieName)=>{
-        //console.log(movieName);
+        console.log("searching");
         setResultsState({
             isLoading:true,
             results:[],

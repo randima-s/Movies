@@ -1,5 +1,5 @@
 import {auth} from "./firebase";
-import { updateUser,fetchMovies } from "../redux/ActionCreators";
+import { updateUser,fetchMovies,loadMovies } from "../redux/ActionCreators";
 import {store} from "../redux/ConfigureStore";
 
 export const  addUser=(email,password)=>{
@@ -68,5 +68,6 @@ auth.onAuthStateChanged((user)=>{
             user:null,
             error:null
         }));
+        store.dispatch(loadMovies([]));
     }
 });

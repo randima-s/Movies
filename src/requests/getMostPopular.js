@@ -1,6 +1,7 @@
 import {popular} from "../sampleData/popular"
 import { API_key } from "./API_key";
 
+
 export const getMostPopular=function(){
     /*return new Promise((resolve,reject)=>{
         fetch("https://imdb-api.com/en/API/MostPopularMovies/"+API_key)
