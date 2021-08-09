@@ -47,7 +47,6 @@ class MainCMP extends Component{
     }
 
     //enter to search
-    //Color change pagination
 
     render(){
         return(

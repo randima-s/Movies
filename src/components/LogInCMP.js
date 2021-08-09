@@ -1,6 +1,5 @@
 
 import {useState} from "react";
-
 import {signIn} from "../firebase/firebaseAuth";
 
 function LogInCMP(props){
@@ -10,7 +9,6 @@ function LogInCMP(props){
     const [passWord,setPassWord]=useState("");
     const [passWordError,setPassWordError]=useState(null);
     const [loginError,setLoginError]=useState(null);
-    //const history=useHistory();
     const regexEmailPattern=/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
 
     const handleChange=(event)=>{
@@ -32,10 +30,6 @@ function LogInCMP(props){
     const handleSubmit=(event)=>{
         if(!userEmailError && !passWordError ){
             signIn(userEmail,passWord)
-            .then((user)=>{
-                console.log(user);
-                //fetchData
-            })
             .catch((error)=>{
                 setLoginError(error);
             });
@@ -48,7 +42,7 @@ function LogInCMP(props){
         <div>
             <div  >
                 <div className="px-4 my-4">
-                    <h2 className="text-center mb-4">Log In</h2>
+                    <h2 className="text-center mb-4 text-purple">Log In</h2>
                     <form onSubmit={handleSubmit}>
                         <div className="mb-2">
                             <label className="form-label">Email</label>
@@ -65,7 +59,6 @@ function LogInCMP(props){
                             <button type="submit" className="btn btn-primary w-100 " disabled={userEmailError || passWordError}>Sign In</button>
                         </div>
                     </form>
-
                     <hr/>
                     <div>
                         New User <span className="text-primary" style={{cursor:"pointer"}} onClick={()=>props.changeState()}>Create Account</span>

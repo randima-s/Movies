@@ -29,7 +29,6 @@ function ResultsCMP(props){
         });
         searchMovies(movieName)
         .then((movies)=>{
-            console.log(movies);
             const modifiedResults= injectUserCollectionData(movies.results);
             setResultsState({
                 isLoading:false,

@@ -1,5 +1,5 @@
 import {sampleDetails} from "../sampleData/details"
-import { API_key } from "./API_key";
+//import { API_key } from "./API_key";
 
 export const getMovieDetails=function(movieID){
     /*return new Promise((resolve,reject)=>{

@@ -1,6 +1,5 @@
 import {popular} from "../sampleData/popular"
-import { API_key } from "./API_key";
-
+//import { API_key } from "./API_key";
 
 export const getMostPopular=function(){
     /*return new Promise((resolve,reject)=>{

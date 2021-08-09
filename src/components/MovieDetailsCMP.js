@@ -52,12 +52,10 @@ const MovieDetailsCMP =function(props){
             description:resultsState.details.fullTitle
         };
 
-        console.log(props.user.user.uid,newItem);
         addData(props.user.user.uid,newItem)
         .then((docRefId)=>{
             newItem.firestoreID=docRefId;
             props.addMovie(newItem);
-            //props.updateComments(newCommentJSON);
         })
         .catch((error)=>{
             console.log(error);
@@ -65,10 +63,8 @@ const MovieDetailsCMP =function(props){
     }
 
     const removeFromCollection=()=>{
-        console.log(props.firestoreID);
         deleteData(props.user.user.uid,props.firestoreID)
         .then(()=>{
-            console.log("success");
             props.removeMovie(props.firestoreID);
         })
         .catch((error)=>{
@@ -99,7 +95,7 @@ const MovieDetailsCMP =function(props){
     else if(resultsState.error){
         return(
             <div>
-                Loading
+                Error
             </div>
         );
     }
@@ -116,7 +112,7 @@ const MovieDetailsCMP =function(props){
 
         const genres=resultsState.details.genreList.map((genre)=>{
             return(
-                <span key={genre.key} className="badge bg-primary me-1">
+                <span key={genre.key} className="badge bg-purple me-1">
                     {genre.value}
                 </span>
             );
@@ -149,7 +145,6 @@ const MovieDetailsCMP =function(props){
                             </div>
                         )
                         }
-                        
                     </div>
                 )}
 

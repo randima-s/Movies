@@ -21,7 +21,7 @@ function ResultGridCMP(props){
     const paginationPages=(pageCount)=>{
         const paginationArr=Array(pageCount);
         for(let i=0;i<pageCount;i++){
-            paginationArr[i]=<li className={currentPage===i+1?"page-item active":"page-item"} key={i+1}><span className="page-link bg-dark text-light border-warning cursor-pointer" onClick={()=>setCurrentPage(i+1)}>{i+1}</span></li>;
+            paginationArr[i]=<li className="page-item" key={i+1}><span className={currentPage===i+1?"page-link pagination-custom-item-active cursor-pointer":"page-link pagination-custom-item cursor-pointer"} onClick={()=>setCurrentPage(i+1)}>{i+1}</span></li>;
         }
         return paginationArr;
     };
@@ -90,15 +90,15 @@ function ResultGridCMP(props){
         return(
             <div className="row">
                 <nav >
-                    <ul className="pagination justify-content-center border-warning cursor-pointer">
+                    <ul className="pagination justify-content-center cursor-pointer">
                         <li className={currentPage===1?"page-item disabled":"page-item"}>
-                        <span className="page-link bg-dark text-light border-warning" href="#" aria-label="Previous" onClick={decPage}>
+                        <span className="page-link pagination-custom-item" href="#" aria-label="Previous" onClick={decPage}>
                             <span aria-hidden="true">&laquo;</span>
                         </span>
                         </li>
                         {paginationPages(pageCount)}
                         <li className={currentPage===pageCount?"page-item disabled":"page-item"}>
-                        <span className="page-link bg-dark text-light border-warning cursor-pointer" href="#" aria-label="Next" onClick={incPage}>
+                        <span className="page-link bpagination-custom-item " href="#" aria-label="Next" onClick={incPage}>
                             <span aria-hidden="true">&raquo;</span>
                         </span>
                         </li>
@@ -106,15 +106,15 @@ function ResultGridCMP(props){
                 </nav>
                 {results}
                 <nav >
-                    <ul className="pagination justify-content-center border-warning cursor-pointer">
+                    <ul className="pagination justify-content-center cursor-pointer">
                         <li className={currentPage===1?"page-item disabled":"page-item"}>
-                        <span className="page-link bg-dark text-light border-warning" href="#" aria-label="Previous" onClick={decPage}>
+                        <span className="page-link pagination-custom-item" href="#" aria-label="Previous" onClick={decPage}>
                             <span aria-hidden="true">&laquo;</span>
                         </span>
                         </li>
                         {paginationPages(pageCount)}
                         <li className={currentPage===pageCount?"page-item disabled":"page-item"}>
-                        <span className="page-link bg-dark text-light border-warning cursor-pointer" href="#" aria-label="Next" onClick={incPage}>
+                        <span className="page-link pagination-custom-item " href="#" aria-label="Next" onClick={incPage}>
                             <span aria-hidden="true">&raquo;</span>
                         </span>
                         </li>

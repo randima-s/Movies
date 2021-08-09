@@ -7,7 +7,7 @@ function LoginModal(props) {
     const [state,setState]=useState("signin");
     return (
         <Modal show={props.show} onHide={props.modalHide} animation={false} scrollable={true} >
-        <Modal.Body className="m-1 p-1">
+        <Modal.Body className="m-1 p-1 modal-body text-light">
         <div className="container ">
             {state==="signin"&&<LogInCMP changeState={()=>setState("newuser")} updateUser={props.updateUser} modalHide={props.modalHide}/>}
             {state==="newuser"&&<NewUserCMP changeState={()=>setState("signin")} updateUser={props.updateUser} modalHide={props.modalHide}/>}

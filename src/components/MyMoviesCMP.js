@@ -21,7 +21,6 @@ function MyMoviesCMP(props){
         return(
             <div className="text-light">
             <div className="movies-nav-filler">
-    
             </div>
             <div className="container">
                 <div>
@@ -50,7 +49,6 @@ function MyMoviesCMP(props){
             </div>
         );
     }
-
 }
 
 export default MyMoviesCMP;

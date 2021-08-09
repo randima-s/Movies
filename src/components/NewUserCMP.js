@@ -46,7 +46,6 @@ function NewUserCMP(props){
         if(!userEmailError && !passWordError && !passWordErrorVerify){
             addUser(userEmail,passWord)
             .then(()=>{
-                console.log("user");
                 return updateUserName(userName);
             })
             .then((message)=>{
@@ -64,7 +63,7 @@ function NewUserCMP(props){
         <div>
             <div>
                 <div className="px-4 my-4">
-                    <h2 className="text-center mb-4">Create Account</h2>
+                    <h2 className="text-center mb-4 text-purple">Create Account</h2>
                     <form onSubmit={handleSubmit}>
                         <div className="mb-2">
                             <label className="form-label">Name</label>

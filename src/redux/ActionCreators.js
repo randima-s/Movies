@@ -12,7 +12,6 @@ export const updateUser=(user)=>{
 
 /////////Movies
 export const fetchMovies=(userID)=>dispatch=>{
-    //const blogs=[];
     dispatch(loadingMovies());
     readData(userID)
     .then((movies)=>{

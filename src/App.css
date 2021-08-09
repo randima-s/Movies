@@ -34,6 +34,10 @@ a {
   color: #b984e2;
 }
 
+.bg-purple {
+  background-color: #51058b;
+}
+
 .movies-nav-bar {
   position: absolute;
   top: 0;
@@ -120,4 +124,47 @@ a {
 /*Make cursor Pointer*/
 .cursor-pointer {
   cursor: pointer;
+}
+
+/*Modal*/
+.modal-body {
+  background-color: black;
+  border: solid black;
+}
+
+.modal-content {
+  background-color: #ae6ae2;
+}
+
+/*pagination*/
+.pagination-custom-item {
+  background-color: black;
+  color: white;
+  border-color: #ae6ae2;
+  border-width: 1px;
+  border-style: solid;
+}
+
+.pagination-custom-item:hover {
+  background-color: black;
+  color: #ae6ae2;
+  border-color: #8e1ee4;
+  border-width: 1px;
+  border-style: solid;
+}
+
+.pagination-custom-item-active {
+  background-color: #ae6ae2;
+  color: white;
+  border-color: #8e1ee4;
+  border-width: 1px;
+  border-style: solid;
+}
+
+.pagination-custom-item-active:hover {
+  background-color: #7a10cc;
+  color: white;
+  border-color: #8e1ee4;
+  border-width: 1px;
+  border-style: solid;
 }
