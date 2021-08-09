@@ -1,4 +1,5 @@
 import { useState,useEffect } from "react";
+import {useHistory} from "react-router-dom";
 import SearchCMP from "./SearchCMP";
 import ResultGridCMP from "./ResultGridCMP";
 import {searchMovies} from "../requests/searchMovies";
@@ -10,14 +11,16 @@ function ResultsCMP(props){
         error:null
     });
 
+    const history=useHistory(null);
+
     useEffect(()=>{
         console.log(props.searchName);
         if(props.searchName){
-            handleSearch(props.searchName);
+            search(props.searchName);
         }
     },[props.searchName]);
 
-    const handleSearch=(movieName)=>{
+    const search=(movieName)=>{
         //console.log(movieName);
         setResultsState({
             isLoading:true,
@@ -44,6 +47,10 @@ function ResultsCMP(props){
         });
     }
 
+    const handleSearch=(movieName)=>{
+        history.push("/results"+movieName);
+    }
+
     //should be moved to backend
     const injectUserCollectionData=(searchResults)=>{
         if(props.user.isLoggedIn && !props.movies.isLoading && !props.movies.error){
@@ -65,7 +72,7 @@ function ResultsCMP(props){
 
             </div>
             <div className="container">
-                <h2 className="text-light text-center">Search Movies</h2>
+                <h2 className="category-heading text-center">Search Movies</h2>
                 <div className="w-50 mx-auto">
                 <SearchCMP handleSearch={handleSearch}/>
                 </div>

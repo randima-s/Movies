@@ -49,9 +49,10 @@ const MovieDetailsCMP =function(props){
             resultType:"Title",
             image:props.image,
             title:props.title,
-            description:props.description
+            description:resultsState.details.fullTitle
         };
 
+        console.log(props.user.user.uid,newItem);
         addData(props.user.user.uid,newItem)
         .then((docRefId)=>{
             newItem.firestoreID=docRefId;
@@ -75,17 +76,17 @@ const MovieDetailsCMP =function(props){
         });
     }
 
-    const updateMovieRating=(newRating)=>{
+    /*const updateMovieRating=(newRating)=>{
         console.log("not available");
-        /*updateRating(props.user.user.uid,props.firestoreID,newRating)
+        updateRating(props.user.user.uid,props.firestoreID,newRating)
         .then(()=>{
             console.log("success");
             props.updateMovie(props.firestoreID,newRating);
         })
         .catch((error)=>{
             console.log(error);
-        });*/
-    }
+        });
+    }*/
 
     
     if(resultsState.isLoading){
@@ -106,7 +107,7 @@ const MovieDetailsCMP =function(props){
 
         const actors=resultsState.details.actorList.map((actor)=>{
             return(
-                <div className="col-lg-2 col-md-3 col-sm-4 col-6 p-2 cast-grid-item" key={actor.id}>
+                <div className="col-lg-2 col-md-3 col-sm-4 col-6 p-1 cast-grid-item" key={actor.id}>
                     <img src={actor.image} alt={actor.name} className="w-100"></img>
                     {actor.name } as <strong>{actor.asCharacter}</strong>
                 </div>
@@ -122,7 +123,7 @@ const MovieDetailsCMP =function(props){
         });
 
         return(
-            <div className="col-12 justify-content-center" key={props.movieID}>
+            <div className="col-12 justify-content-center " key={props.movieID}>
                 <div className="text-end"><span className="badge bg-danger" style={{cursor:"pointer"}} onClick={props.handleClose}>X</span></div>
                 <div className="movie-details">
                 <h4 className="text-center">{props.title}</h4>
@@ -131,13 +132,24 @@ const MovieDetailsCMP =function(props){
 
                 {props.user.isLoggedIn && (
                     <div className="mx-auto mb-2">
+                        
                         {props.rating===0?(
-                        <p className="text-center mb-0" onClick={addToCollection}>Add to favourites</p>
+                            <div className="cursor-pointer">
+                                <svg width="30" height="32" viewBox="0 0 30 32" fill="none" xmlns="http://www.w3.org/2000/svg" className="heart-svg"  onClick={addToCollection}>
+                                <path id="heart" d="M15.6124 5.55276C8.01243 -3.24724 2.11243 2.55276 1.11243 7.55275C0.112426 12.5527 6.11243 20.0527 6.11243 20.0527L15.6124 31.0527L25.1124 20.0527C25.1124 20.0527 32 14 28.1124 5.05276C24.2249 -3.89449 15.6124 5.55276 15.6124 5.55276Z"  stroke="#B10E0E"/>
+                                </svg>
+                                <p className="text-center mb-0" onClick={addToCollection}>Add to favourites</p>
+                            </div>
                         ):(
-                        <p className="text-center mb-0" onClick={removeFromCollection}>Remove from favourites</p>
+                            <div className="cursor-pointer">
+                                <svg width="30" height="32" viewBox="0 0 30 32" fill="none" xmlns="http://www.w3.org/2000/svg" className="heart-svg" onClick={removeFromCollection}>
+                                <path id="heart" d="M15.6124 5.55276C8.01243 -3.24724 2.11243 2.55276 1.11243 7.55275C0.112426 12.5527 6.11243 20.0527 6.11243 20.0527L15.6124 31.0527L25.1124 20.0527C25.1124 20.0527 32 14 28.1124 5.05276C24.2249 -3.89449 15.6124 5.55276 15.6124 5.55276Z" fill="#CC3F3F" stroke="#B10E0E"/>
+                                </svg>
+                                <p className="text-center mb-0" onClick={removeFromCollection}>Remove from favourites</p>
+                            </div>
                         )
                         }
-                        <p className="text-center mb-0 mt-4" onClick={()=>updateMovieRating(4)}>Rating {props.rating}</p>
+                        
                     </div>
                 )}
 

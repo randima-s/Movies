@@ -1,7 +1,7 @@
-//import {sampleResult} from "../sampleData/inception"
+import {popular} from "../sampleData/popular"
 import { API_key } from "./API_key";
 
-export const searchMovies=function(movieName){
+export const getMostPopular=function(){
     return new Promise((resolve,reject)=>{
         fetch("https://imdb-api.com/en/API/MostPopularMovies/"+API_key)
         .then((response)=>{
@@ -21,8 +21,8 @@ export const searchMovies=function(movieName){
             reject(error);
         });
     });
-    /*return new Promise((resolve,reject)=>{
-        resolve(sampleResult);
+    return new Promise((resolve,reject)=>{
+        resolve(popular);
     }
-    );*/
+    );
 }

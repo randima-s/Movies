@@ -16,8 +16,8 @@ function SearchCMP(props){
 
     return(
         <div>
-            <div className="row input-group mb-2 justify-content-center">
-                <div className="col-md-9 mb-2">
+            <div className="row  mb-2 justify-content-center  ">
+                <div className="col-md-9 mb-2 ">
                 <input type="text" className={error?"form-control  border-2 border-danger":"form-control "} placeholder="Movie Name" ref={movieName}/>
                 </div>
                 <div className="col-auto mb-2">

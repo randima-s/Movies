@@ -5,7 +5,9 @@ import NavBarCMP from "./NavBarCMP";
 import HomePageCMP from "./HomePageCMP";
 import ResultsCMP from "./ResultsCMP";
 import MyMoviesCMP from "./MyMoviesCMP";
+import LoginModal from "./LoginModal";
 import { addMovie,removeMovie,updateMovie } from "../redux/ActionCreators";
+
 
 const mapStateToProps = state => {
     return {
@@ -23,7 +25,8 @@ class MainCMP extends Component{
     constructor(props){
         super(props);
         this.state={
-            searchName:""
+            searchName:"",
+            modalShow:false
         }
     }
 
@@ -36,28 +39,39 @@ class MainCMP extends Component{
         this.setState({searchName:searchName});
     }
 
-    //modify search using router parameters
+    toggleModal=()=>{
+        this.setState({modalShow:!this.state.modalShow});
+    }
+
     //enter to search
 
     render(){
         return(
             <div>
-                <NavBarCMP user={this.props.user}/>
+                <NavBarCMP user={this.props.user} toggleModal={this.toggleModal}/>
                 <Switch>
-                    <Route exact path="/" component={()=><HomePageCMP isLoggedIn={this.props.user.isLoggedIn} setSearchName={this.setSearchName}/>}/>
+                    <Route exact path="/" component={()=><HomePageCMP isLoggedIn={this.props.user.isLoggedIn} setSearchName={this.setSearchName} 
+                        toggleModal={this.toggleModal}
+                        user={this.props.user}
+                        addMovie={this.props.addMovie}
+                        removeMovie={this.props.removeMovie}
+                        updateMovie={this.props.updateMovie}
+                        movies={this.props.movies}/>}/>
                     {this.props.user.isLoggedIn &&<Route path ="/mymovies" component={()=><MyMoviesCMP user={this.props.user} movies={this.props.movies}
-                    addMovie={this.props.addMovie}
-                    removeMovie={this.props.removeMovie}
-                    updateMovie={this.props.updateMovie}/>}></Route>}
-                    <Route  path="/results" component={({match})=><ResultsCMP 
-                    searchName={this.state.searchName} 
-                    user={this.props.user}
-                    addMovie={this.props.addMovie}
-                    removeMovie={this.props.removeMovie}
-                    updateMovie={this.props.updateMovie}
-                    movies={this.props.movies}/>}/>
+                        addMovie={this.props.addMovie}
+                        removeMovie={this.props.removeMovie}
+                        updateMovie={this.props.updateMovie}/>}></Route>}
+                    <Route  path="/results:movieName" component={({match})=><ResultsCMP 
+                        searchName={match.params.movieName} 
+                        setSearchName={this.setSearchName}
+                        user={this.props.user}
+                        addMovie={this.props.addMovie}
+                        removeMovie={this.props.removeMovie}
+                        updateMovie={this.props.updateMovie}
+                        movies={this.props.movies}/>}/>
                     <Redirect to="/"/>
                 </Switch>
+                <LoginModal show={this.state.modalShow} modalHide={this.toggleModal}/>
             </div>
         );
     };
