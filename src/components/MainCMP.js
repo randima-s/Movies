@@ -6,14 +6,15 @@ import HomePageCMP from "./HomePageCMP";
 import ResultsCMP from "./ResultsCMP";
 import MyMoviesCMP from "./MyMoviesCMP";
 import LoginModal from "./LoginModal";
-import { addMovie,removeMovie,updateMovie,fetchPopular } from "../redux/ActionCreators";
+import { addMovie,removeMovie,updateMovie,fetchPopular,searchMoviesAction } from "../redux/ActionCreators";
 
 
 const mapStateToProps = state => {
     return {
         user:state.user,
         movies:state.movies,
-        popular:state.popular
+        popular:state.popular,
+        results:state.results
     }
 }
 
@@ -21,7 +22,8 @@ const mapDispatchToProps=dispatch=>({
     addMovie:(movie)=>dispatch(addMovie(movie)),
     removeMovie:(firestoreID)=>dispatch(removeMovie(firestoreID)),
     updateMovie:(firestoreID,newRating)=>dispatch(updateMovie(firestoreID,newRating)),
-    fetchPopular:()=>dispatch(fetchPopular())
+    fetchPopular:()=>dispatch(fetchPopular()),
+    searchMoviesAction:(title)=>dispatch(searchMoviesAction(title))
 })
 class MainCMP extends Component{
     constructor(props){
@@ -53,7 +55,8 @@ class MainCMP extends Component{
             <div>
                 <NavBarCMP user={this.props.user} toggleModal={this.toggleModal}/>
                 <Switch>
-                    <Route exact path="/" component={()=><HomePageCMP isLoggedIn={this.props.user.isLoggedIn} setSearchName={this.setSearchName} 
+                    <Route exact path="/" component={()=><HomePageCMP isLoggedIn={this.props.user.isLoggedIn} 
+                        handleSearch={this.props.searchMoviesAction}
                         toggleModal={this.toggleModal}
                         user={this.props.user}
                         addMovie={this.props.addMovie}
@@ -65,12 +68,14 @@ class MainCMP extends Component{
                         addMovie={this.props.addMovie}
                         removeMovie={this.props.removeMovie}
                         updateMovie={this.props.updateMovie}/>}></Route>}
-                    <Route  path="/results:movieName" component={({match})=><ResultsCMP 
+                    <Route  path="/results" component={({match})=><ResultsCMP 
                         searchName={match.params.movieName} 
                         user={this.props.user}
                         addMovie={this.props.addMovie}
                         removeMovie={this.props.removeMovie}
                         updateMovie={this.props.updateMovie}
+                        results={this.props.results}
+                        handleSearch={this.props.searchMoviesAction}
                         movies={this.props.movies}/>}/>
                     <Redirect to="/"/>
                 </Switch>

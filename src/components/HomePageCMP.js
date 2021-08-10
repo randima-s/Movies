@@ -10,8 +10,9 @@ function HomePageCMP(props){
     const popularMoviesRef=useRef(null);
 
     const handleSearch=(movieName)=>{
-        props.setSearchName(movieName);
-        history.push("/results"+movieName);
+        props.handleSearch(movieName);
+        history.push("/results");
+        //history.push("/results"+movieName);
     }
 
     return(

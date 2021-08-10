@@ -1,6 +1,7 @@
 import * as ActionTypes from "./ActionTypes";
 import {readData} from "../firebase/fireStore";
 import {getMostPopular} from "../requests/getMostPopular";
+import {searchMovies} from "../requests/searchMovies";
 
 /////////User
 export const updateUser=(user)=>{
@@ -94,6 +95,40 @@ export const loadPopular=(movies)=>{
 export const errorPopular=(error)=>{
     return({
         type:ActionTypes.POPULAR_ERROR,
+        payload:error
+    });
+}
+
+//////////////Results
+export const searchMoviesAction=(title)=>dispatch=>{
+    //const blogs=[];
+    dispatch(loadingResults());
+    searchMovies()
+    .then((results)=>{
+        dispatch(loadResults(results.results));
+    })
+    .catch(error=>{
+        console.log("Error: "+error);
+        dispatch(errorResults(error));
+    });
+}
+
+export const loadingResults=()=>{
+    return({
+        type:ActionTypes.RESULTS_LOADING,
+    });
+}
+
+export const loadResults=(results)=>{
+    return({
+        type:ActionTypes.RESULTS_LOAD,
+        payload:results
+    });
+}
+
+export const errorResults=(error)=>{
+    return({
+        type:ActionTypes.RESULTS_ERROR,
         payload:error
     });
 }

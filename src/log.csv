@@ -1,0 +1,10 @@
+20e78af;randima;Mon Aug 9 23:52:43 2021 +0530;code refactoring
+b07d291;randima;Mon Aug 9 23:08:22 2021 +0530;popular movies moved to store
+169e59b;randima;Mon Aug 9 18:35:11 2021 +0530;pagination moved to results Grid
+2daf195;randima;Mon Aug 9 12:17:56 2021 +0530;UI updated, Movie browsing section added with pagination
+9be7d76;randima;Mon Aug 9 00:16:04 2021 +0530;keyframe animation added, small bug fixes
+9f86022;randima;Sun Aug 8 23:02:17 2021 +0530;firestore complete
+6441604;randima;Sun Aug 8 16:57:08 2021 +0530;firebase authentication added, redux store added
+1cf4877;randima;Sun Aug 8 14:49:54 2021 +0530;login UI added, overall UI updated
+8fd680c;randima;Sun Aug 8 09:57:18 2021 +0530;home page, search bar - basic version
+b73267d;randima;Sat Aug 7 21:31:01 2021 +0530;Initialize project using Create React App

@@ -119,7 +119,7 @@ const MovieDetailsCMP =function(props){
         });
 
         return(
-            <div className="col-12 justify-content-center " key={props.movieID}>
+            <div className="col-12 justify-content-center " key={props.movieID+"d"}>
                 <div className="text-end"><span className="badge bg-danger" style={{cursor:"pointer"}} onClick={props.handleClose}>X</span></div>
                 <div className="movie-details">
                 <h4 className="text-center">{props.title}</h4>

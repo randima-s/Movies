@@ -1,0 +1,10 @@
+* 20e78af - (12 hours ago) code refactoring - randima (HEAD -> master, origin/master)
+* b07d291 - (13 hours ago) popular movies moved to store - randima
+* 169e59b - (17 hours ago) pagination moved to results Grid - randima
+* 2daf195 - (24 hours ago) UI updated, Movie browsing section added with pagination - randima
+* 9be7d76 - (2 days ago) keyframe animation added, small bug fixes - randima
+* 9f86022 - (2 days ago) firestore complete - randima
+* 6441604 - (2 days ago) firebase authentication added, redux store added - randima
+* 1cf4877 - (2 days ago) login UI added, overall UI updated - randima
+* 8fd680c - (2 days ago) home page, search bar - basic version - randima
+* b73267d - (3 days ago) Initialize project using Create React App - randima

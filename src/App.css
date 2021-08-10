@@ -61,7 +61,7 @@ a {
 /*Home*/
 .home-search-background {
   height: 100vh;
-  background-image: url("home.jpg");
+  background-image: url(./static/home.jpg);
   background-repeat: no-repeat;
   background-size: cover;
 }

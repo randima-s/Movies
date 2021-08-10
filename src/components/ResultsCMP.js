@@ -2,55 +2,25 @@ import { useState,useEffect } from "react";
 import {useHistory} from "react-router-dom";
 import SearchCMP from "./SearchCMP";
 import ResultGridCMP from "./ResultGridCMP";
-import {searchMovies} from "../requests/searchMovies";
 
 function ResultsCMP(props){
-    const [resultsState,setResultsState]=useState({
-        isLoading:true,
-        results:[],
-        error:null
-    });
 
     const history=useHistory(null);
 
-    useEffect(()=>{
-        console.log(props.searchName);
-        if(props.searchName){
-            search(props.searchName);
-        }
-    },[props.searchName]);
-
-    const search=(movieName)=>{
-        console.log("searching");
-        setResultsState({
-            isLoading:true,
-            results:[],
-            error:null
-        });
-        searchMovies(movieName)
-        .then((movies)=>{
-            const modifiedResults= injectUserCollectionData(movies.results);
-            setResultsState({
-                isLoading:false,
-                results:modifiedResults,
-                error:null
-            });
-        })
-        .catch((error)=>{
-            console.log(error);
-            setResultsState({
-                isLoading:false,
-                results:[],
-                error:error
-            });
-        });
-    }
-
     const handleSearch=(movieName)=>{
-        history.push("/results"+movieName);
+        props.handleSearch(movieName);
+        history.push("/results");
+        //history.push("/results"+movieName);
     }
 
     //should be moved to backend
+    /*((searchResults)=>{
+        if(props.user.isLoggedIn && !props.movies.isLoading && !props.movies.error && !props.results.isLoading && props.results.results.length>0){
+
+
+        }
+    })(props.results.results);
+
     const injectUserCollectionData=(searchResults)=>{
         if(props.user.isLoggedIn && !props.movies.isLoading && !props.movies.error){
             console.log("modifying");
@@ -63,7 +33,7 @@ function ResultsCMP(props){
         else{
             return searchResults;
         }
-    }
+    }*/
 
     return(
         <div>
@@ -77,9 +47,9 @@ function ResultsCMP(props){
                 </div>
                 <div className="text-light results-grid">
                 <ResultGridCMP 
-                    isLoading={resultsState.isLoading} 
-                    error={resultsState.error} 
-                    results={resultsState.results} 
+                    isLoading={props.results.isLoading} 
+                    error={props.results.error} 
+                    results={props.results.results} 
                     user={props.user}
                     addMovie={props.addMovie}
                     removeMovie={props.removeMovie}
@@ -87,7 +57,6 @@ function ResultsCMP(props){
                 />
                 </div>
             </div>
-            
         </div>
     );
 }
