@@ -47,6 +47,7 @@ function ResultsCMP(props){
                 </div>
                 <div className="text-light results-grid">
                 <ResultGridCMP 
+                    movies={props.movies}    
                     isLoading={props.results.isLoading} 
                     error={props.results.error} 
                     results={props.results.results} 

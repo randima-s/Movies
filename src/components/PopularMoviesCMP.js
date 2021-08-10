@@ -5,12 +5,12 @@ function PopularMoviesCMP(props){
     
     const [modifiedResults,setModifiedResults]=useState([]);
 
-    useEffect(()=>{
+    /*useEffect(()=>{
         injectUserCollectionData(props.popular.movies);
-    },[props.movies.movies,props.popular.movies]);
+    },[props.movies.movies,props.popular.movies]);*/
 
     //should be moved to backend
-    const injectUserCollectionData=(popularMovies)=>{
+    /*const injectUserCollectionData=(popularMovies)=>{
         if(props.user.isLoggedIn && !props.movies.isLoading && !props.movies.error){
             const modifiedResults=popularMovies.map((movie)=>{
                 return props.movies.movies.find((userMovie)=>userMovie.id===movie.id)||movie;
@@ -20,7 +20,7 @@ function PopularMoviesCMP(props){
         else{
             setModifiedResults(popularMovies);
         }
-    }
+    }*/
 
     return(
         <div>
@@ -33,9 +33,10 @@ function PopularMoviesCMP(props){
                 Most Popular Movies
                 </h1>
                 <ResultGridCMP 
+                    movies={props.movies}
                     isLoading={props.popular.isLoading} 
                     error={props.popular.error} 
-                    results={modifiedResults} 
+                    results={props.popular.movies} 
                     user={props.user}
                     addMovie={props.addMovie}
                     removeMovie={props.removeMovie}

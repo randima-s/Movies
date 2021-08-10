@@ -26,17 +26,12 @@ function MyMoviesCMP(props){
                 <div>
                     <h1 className="text-center">{props.user.user.displayName}</h1>
                 </div>
-                <div className="mb-4">
-                    <h4 className="text-warning">Recommendations</h4>
-                    <hr/>
-                    <div className="empty-box">
-                        Keep adding movies to get Recommendations
-                    </div>
-                </div>
+                
                 <div>
                     <h4>My Movie Collection</h4>
                     <hr/>
                     <ResultGridCMP 
+                    movies={props.movies}
                     isLoading={props.movies.isLoading} 
                     error={props.movies.error} 
                     results={props.movies.movies} 
@@ -52,3 +47,13 @@ function MyMoviesCMP(props){
 }
 
 export default MyMoviesCMP;
+
+/*
+<div className="mb-4">
+                    <h4 className="text-warning">Recommendations</h4>
+                    <hr/>
+                    <div className="empty-box">
+                        Keep adding movies to get Recommendations
+                    </div>
+                </div>
+                */

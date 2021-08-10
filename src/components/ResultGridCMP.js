@@ -15,7 +15,15 @@ function ResultGridCMP(props){
     },[props.results]);
 
     useEffect(()=>{
-        setDisplayedResults(props.results.slice(8*(currentPage-1),8*currentPage));
+        let displayedResults_=props.results.slice(8*(currentPage-1),8*currentPage);
+        if( props.user.isLoggedIn && !props.movies.error &&  props.movies.movies.length>0 && displayedResults_.length>0){
+            console.log("injecting");
+            displayedResults_=displayedResults_.map((movie)=>{
+                return props.movies.movies.find((userMovie)=>userMovie.id===movie.id)||movie;
+            });
+            console.log(displayedResults_);
+        }
+        setDisplayedResults(displayedResults_);
     },[currentPage]);
 
     const paginationPages=(pageCount)=>{
@@ -53,6 +61,17 @@ function ResultGridCMP(props){
         );
     }
     else {
+
+        /*((searchResults)=>{
+            if( props.user.isLoggedIn && !props.movies.error &&  props.movies.movies.length>0){
+                console.log("injecting");
+                const modifiedResults=searchResults.map((movie)=>{
+                    return props.movies.movies.find((userMovie)=>userMovie.id===movie.id)||movie;
+                });
+                console.log(modifiedResults);
+                setDisplayedResults(modifiedResults);
+            }
+        })(props.results);*/
 
         const results=displayedResults.map((result)=>{
             if(selectedMovie===result.id){
