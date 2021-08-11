@@ -47,7 +47,7 @@ const MovieDetailsCMP =function(props){
             rating:1,
             id:props.movieID,
             resultType:"Title",
-            image:props.image,
+            image:resultsState.details.image,
             title:props.title,
             description:resultsState.details.fullTitle
         };
