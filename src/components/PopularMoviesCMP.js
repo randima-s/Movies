@@ -1,9 +1,7 @@
-import { useState,useEffect } from "react";
+
 import ResultGridCMP from "./ResultGridCMP";
 
 function PopularMoviesCMP(props){
-    
-    const [modifiedResults,setModifiedResults]=useState([]);
 
     /*useEffect(()=>{
         injectUserCollectionData(props.popular.movies);
@@ -41,6 +39,7 @@ function PopularMoviesCMP(props){
                     addMovie={props.addMovie}
                     removeMovie={props.removeMovie}
                     updateMovie={props.updateMovie}
+                    gridSize={"small"}
                 />
                 </div>
             </div>

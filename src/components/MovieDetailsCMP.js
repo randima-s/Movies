@@ -1,7 +1,7 @@
 
 import {useState, useEffect } from "react";
 import { getMovieDetails } from "../requests/getMovieDetails";
-import {addData,deleteData,updateRating} from "../firebase/fireStore";
+import {addData,deleteData} from "../firebase/fireStore";
 
 const MovieDetailsCMP =function(props){
 
@@ -150,7 +150,7 @@ const MovieDetailsCMP =function(props){
 
                 <div className="row">
                     <div className="col-md-4">
-                        <img src={props.image} alt={props.title} className="w-100"/>
+                        <img src={resultsState.details.image} alt={props.title} className="w-100"/>
                         Rating <span className="badge bg-danger text-light">{resultsState.details.contentRating} </span> 
                         , IMDB <span className="badge bg-warning text-dark">{resultsState.details.imDbRating}</span>
                     </div>

@@ -1,4 +1,4 @@
-import {sampleResult} from "../sampleData/inception"
+//import {sampleResult} from "../sampleData/inception"
 import { API_key } from "./API_key";
 
 export const searchMovies=function(movieName){
@@ -22,7 +22,7 @@ export const searchMovies=function(movieName){
             reject(error);
         });
     });
-    return new Promise((resolve,reject)=>{
+    /*return new Promise((resolve,reject)=>{
         setTimeout(()=>resolve(sampleResult),400);
-    });
+    });*/
 }

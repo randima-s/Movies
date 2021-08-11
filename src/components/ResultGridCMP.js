@@ -9,13 +9,15 @@ function ResultGridCMP(props){
     const [displayedResults,setDisplayedResults]=useState([]);
 
     useEffect(()=>{
-        setPageCount(Math.ceil(props.results.length/8));
+        setPageCount(Math.ceil(props.results.length/12));
         setCurrentPage(1);
-        setDisplayedResults(props.results.slice(8*(currentPage-1),8*currentPage));
-    },[props.results]);
+        setDisplayedResults(props.results.slice(12*(currentPage-1),12*currentPage));
+    },[props.results,currentPage]);
+
+    //const gridSize="small";
 
     useEffect(()=>{
-        let displayedResults_=props.results.slice(8*(currentPage-1),8*currentPage);
+        let displayedResults_=props.results.slice(12*(currentPage-1),12*currentPage);
         if( props.user.isLoggedIn && !props.movies.error &&  props.movies.movies.length>0 && displayedResults_.length>0){
             console.log("injecting");
             displayedResults_=displayedResults_.map((movie)=>{
@@ -76,7 +78,7 @@ function ResultGridCMP(props){
         const results=displayedResults.map((result)=>{
             if(selectedMovie===result.id){
                 return(
-                    <MovieDetailsCMP movieID={result.id} title={result.title} description={result.description} image={result.image} 
+                    <MovieDetailsCMP movieID={result.id} title={result.title} description={result.description} 
                     firestoreID={result.firestoreID||null}
                     handleClose={()=>setSelectedMovie(null)}
                     user={props.user}
@@ -88,7 +90,7 @@ function ResultGridCMP(props){
             }
             else{
                 return(
-                    <div className="col-12 col-lg-3 co-md-4 col-sm-6 p-2 " key={result.id} onClick={()=>setSelectedMovie(result.id)}>
+                    <div className={props.gridSize==="small"?"col-6 col-lg-2 co-md-2 col-sm-6 p-2 ":"col-12 col-lg-3 co-md-3 col-sm-6 p-2 "} key={result.id} onClick={()=>setSelectedMovie(result.id)}>
                         <div className="results-grid-item p-2">
                         <span className="position-relative pt-2">
                             {result.title} 

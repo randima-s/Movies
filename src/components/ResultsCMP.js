@@ -1,4 +1,3 @@
-import { useState,useEffect } from "react";
 import {useHistory} from "react-router-dom";
 import SearchCMP from "./SearchCMP";
 import ResultGridCMP from "./ResultGridCMP";

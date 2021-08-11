@@ -1,4 +1,4 @@
-import {sampleDetails} from "../sampleData/details"
+//import {sampleDetails} from "../sampleData/details"
 import { API_key } from "./API_key";
 
 export const getMovieDetails=function(movieID){
@@ -22,8 +22,8 @@ export const getMovieDetails=function(movieID){
             reject(error);
         });
     });
-    return new Promise((resolve,reject)=>{
+    /*return new Promise((resolve,reject)=>{
         setTimeout(()=> resolve(sampleDetails),400);
     }
-    );
+    );*/
 }
