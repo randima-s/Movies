@@ -12,7 +12,7 @@ function ResultGridCMP(props){
         setPageCount(Math.ceil(props.results.length/12));
         setCurrentPage(1);
         setDisplayedResults(props.results.slice(12*(currentPage-1),12*currentPage));
-    },[props.results,currentPage]);
+    },[props.results]);
 
     //const gridSize="small";
 
