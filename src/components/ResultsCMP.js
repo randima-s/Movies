@@ -8,31 +8,9 @@ function ResultsCMP(props){
 
     const handleSearch=(movieName)=>{
         props.handleSearch(movieName);
-        history.push("/results");
+        //history.push("/results");
         //history.push("/results"+movieName);
     }
-
-    //should be moved to backend
-    /*((searchResults)=>{
-        if(props.user.isLoggedIn && !props.movies.isLoading && !props.movies.error && !props.results.isLoading && props.results.results.length>0){
-
-
-        }
-    })(props.results.results);
-
-    const injectUserCollectionData=(searchResults)=>{
-        if(props.user.isLoggedIn && !props.movies.isLoading && !props.movies.error){
-            console.log("modifying");
-            const modifiedResults=searchResults.map((movie)=>{
-                return props.movies.movies.find((userMovie)=>userMovie.id===movie.id)||movie;
-            });
-            console.log(modifiedResults);
-            return modifiedResults;
-        }
-        else{
-            return searchResults;
-        }
-    }*/
 
     return(
         <div>

@@ -103,7 +103,7 @@ export const errorPopular=(error)=>{
 export const searchMoviesAction=(title)=>dispatch=>{
     //const blogs=[];
     dispatch(loadingResults());
-    searchMovies()
+    searchMovies(title)
     .then((results)=>{
         dispatch(loadResults(results.results));
     })

@@ -1,4 +1,4 @@
-import {useState,useEffect} from "react";
+import {useState,useEffect,useRef} from "react";
 import MovieDetailsCMP from "./MovieDetailsCMP";
 
 function ResultGridCMP(props){
@@ -7,6 +7,8 @@ function ResultGridCMP(props){
     const [currentPage,setCurrentPage]=useState(0);
     const [pageCount,setPageCount]=useState(1);
     const [displayedResults,setDisplayedResults]=useState([]);
+
+    const detailsRef=useRef(null);
 
     useEffect(()=>{
         setPageCount(Math.ceil(props.results.length/12));
@@ -35,6 +37,10 @@ function ResultGridCMP(props){
         }
         return paginationArr;
     };
+
+    const handleDetails=(movieID)=>{
+        setSelectedMovie(movieID);
+    }
 
     const incPage=()=>{
         if(currentPage<pageCount){
@@ -78,19 +84,21 @@ function ResultGridCMP(props){
         const results=displayedResults.map((result)=>{
             if(selectedMovie===result.id){
                 return(
+                    <div ref={detailsRef}>
                     <MovieDetailsCMP movieID={result.id} title={result.title} description={result.description} 
                     firestoreID={result.firestoreID||null}
-                    handleClose={()=>setSelectedMovie(null)}
+                    handleClose={()=>handleDetails(null)}
                     user={props.user}
                     addMovie={props.addMovie}
                     removeMovie={props.removeMovie}
                     updateMovie={props.updateMovie}
                     rating={result.rating ||0}/>
+                    </div>
                 );
             }
             else{
                 return(
-                    <div className={props.gridSize==="small"?"col-6 col-lg-2 co-md-2 col-sm-6 p-2 ":"col-12 col-lg-3 co-md-3 col-sm-6 p-2 "} key={result.id} onClick={()=>setSelectedMovie(result.id)}>
+                    <div className={props.gridSize==="small"?"col-6 col-lg-2 co-md-2 col-sm-6 p-2 ":"col-12 col-lg-3 co-md-3 col-sm-6 p-2 "} key={result.id} onClick={()=>handleDetails(result.id)}>
                         <div className="results-grid-item p-2">
                         <span className="position-relative pt-2">
                             {result.title} 

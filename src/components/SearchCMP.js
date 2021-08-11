@@ -1,29 +1,34 @@
-import {useRef,useState} from "react";
+import {useState} from "react";
 
 function SearchCMP(props){
     const [error,setError]=useState(false);
+    const [searchText,setSearchText]=useState("");
 
-    const movieName=useRef(null);
-    const handleSearch=()=>{
-        if(movieName.current.value){
+    const handleSearch=(e)=>{
+        if(searchText){
             setError(false);
-            props.handleSearch(movieName.current.value);
+            props.handleSearch(searchText);
         }
         else{
             setError(true);
         }
+        e.preventDefault();
+    }
+
+    const handleChange=(e)=>{
+        setSearchText(e.target.value);
     }
 
     return(
         <div>
-            <div className="row  mb-2 justify-content-center  ">
+            <form className="row  mb-2 justify-content-center " onSubmit={handleSearch}>
                 <div className="col-md-9 mb-2 ">
-                <input type="text" className={error?"form-control  border-2 border-danger":"form-control "} placeholder="Movie Name" ref={movieName}/>
+                <input type="text" className={error?"form-control  border-2 border-danger":"form-control "} placeholder="Movie Name"  onChange={handleChange} value={searchText}/>
                 </div>
                 <div className="col-auto mb-2">
-                <button type="submit" className="btn btn-primary " onClick={handleSearch}>Search</button>
+                <button type="submit" className="btn btn-primary " >Search</button>
                 </div>
-            </div>
+            </form>
         </div>
     );
 }
