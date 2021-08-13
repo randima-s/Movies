@@ -39,7 +39,6 @@ function PopularMoviesCMP(props){
                     addMovie={props.addMovie}
                     removeMovie={props.removeMovie}
                     updateMovie={props.updateMovie}
-                    gridSize={"small"}
                 />
                 </div>
             </div>

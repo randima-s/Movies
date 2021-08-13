@@ -92,20 +92,6 @@ a {
   }
 }
 
-/*Movie Results & Details*/
-.results-grid {
-  min-height: 80vh;
-  padding: 1rem;
-}
-
-.results-grid-item:hover {
-  box-shadow: 0px 0px 4px 1px #0d6efd;
-}
-
-.cast-grid-item:hover {
-  border: solid #0d6efd 1px;
-}
-
 /*Empty box*/
 .empty-box {
   min-height: 4rem;
@@ -166,4 +152,59 @@ a {
   border-color: #8e1ee4;
   border-width: 1px;
   border-style: solid;
+}
+
+/*Movie Results & Details*/
+.image {
+  width: 100%;
+}
+
+.results-grid {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+}
+
+.results-grid-item {
+  width: 250px;
+  height: 400px;
+  padding: 0.5rem;
+  margin: 0.5rem;
+  overflow: hidden;
+}
+
+.results-grid-item:hover {
+  box-shadow: 0px 0px 4px 1px #0d6efd;
+}
+
+.results-grid-item-liked {
+  width: 250px;
+  height: 400px;
+  padding: 0.5rem;
+  margin: 0.5rem;
+  overflow: hidden;
+  background-color: #270b0a;
+}
+
+.results-grid-item-liked:hover {
+  box-shadow: 0px 0px 4px 1px #fc1717af;
+}
+
+.cast-grid-item:hover {
+  box-shadow: 0px 0px 4px 1px #0d6efd;
+}
+
+/*Actors*/
+.actors-grid {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+}
+
+.actors-grid-item {
+  width: 200px;
+  height: 380px;
+  padding: 0.5rem;
+  margin: 0.5rem;
+  overflow: auto;
 }

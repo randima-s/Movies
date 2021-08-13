@@ -9,7 +9,7 @@ function LogInCMP(props){
     const [passWord,setPassWord]=useState("");
     const [passWordError,setPassWordError]=useState(null);
     const [loginError,setLoginError]=useState(null);
-    const regexEmailPattern=/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
+    const regexEmailPattern=/^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/;
 
     const handleChange=(event)=>{
         const target=event.target;
@@ -49,7 +49,7 @@ function LogInCMP(props){
                             <input type="email" className="form-control" id="userEmail" placeholder="abc@def.com" value={userEmail} onChange={handleChange}/>
                             {userEmailError&& <p className="text-danger">{userEmailError}</p>}
                         </div>
-                        <div className="mb-2">
+                        <div className="mb-3">
                             <label className="form-label">Password</label>
                             <input type="password" className="form-control" id="passWord" placeholder="" value={passWord} onChange={handleChange}/>
                             {passWordError&& <p className="text-danger">{passWordError}</p>}

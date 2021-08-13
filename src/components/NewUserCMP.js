@@ -15,7 +15,7 @@ function NewUserCMP(props){
     const [passWordErrorVerify,setPassWordErrorVerify]=useState(null);
     const [accountError,setAccountError]=useState(null);
 
-    const regexEmailPattern=/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
+    const regexEmailPattern=/^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/;
 
     const handleChange=(event)=>{
         const target=event.target;

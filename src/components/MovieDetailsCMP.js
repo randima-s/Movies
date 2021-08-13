@@ -2,6 +2,7 @@
 import {useState, useEffect } from "react";
 import { getMovieDetails } from "../requests/getMovieDetails";
 import {addData,deleteData} from "../firebase/fireStore";
+import ImageDisplay from "./ImageDisplay";
 
 const MovieDetailsCMP =function(props){
 
@@ -103,8 +104,8 @@ const MovieDetailsCMP =function(props){
 
         const actors=resultsState.details.actorList.map((actor)=>{
             return(
-                <div className="col-lg-2 col-md-3 col-sm-4 col-6 p-1 cast-grid-item" key={actor.id}>
-                    <img src={actor.image} alt={actor.name} className="w-100"></img>
+                <div className="actors-grid-item" key={actor.id}>
+                    <ImageDisplay src={actor.image} alt={actor.name} text={""}/>
                     {actor.name } as <strong>{actor.asCharacter}</strong>
                 </div>
             );
@@ -189,15 +190,16 @@ const MovieDetailsCMP =function(props){
                         </div>
 
                     </div>
+                </div>
                     <h4 className="mt-4">Cast</h4>
                     <hr/>
-                    {actors}
-                </div>
+                    <div className="actors-grid">
+                        {actors}
+                    </div>
                 </div>
             </div>
         );
     }
-    
 }
 
 export default MovieDetailsCMP;

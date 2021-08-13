@@ -1,15 +1,10 @@
-import {useHistory} from "react-router-dom";
 import SearchCMP from "./SearchCMP";
 import ResultGridCMP from "./ResultGridCMP";
 
 function ResultsCMP(props){
 
-    const history=useHistory(null);
-
     const handleSearch=(movieName)=>{
         props.handleSearch(movieName);
-        //history.push("/results");
-        //history.push("/results"+movieName);
     }
 
     return(
