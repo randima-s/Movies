@@ -17,7 +17,7 @@ function HomePageCMP(props){
 
     return(
         <div>
-        <div className="row home-search-background align-items-center " >
+        <div className="row home-search-background align-items-center m-0" >
             <div className="row justify-content-center">
                 <div className="col-10 col-lg-4 col-md-6 col-sm-8 text-light home-search-container">
                     <h4 className="text-center mx-2 mb-0">Welocome</h4>
