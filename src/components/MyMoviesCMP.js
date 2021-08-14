@@ -26,7 +26,6 @@ function MyMoviesCMP(props){
                 <div>
                     <h1 className="text-center">{props.user.user.displayName}</h1>
                 </div>
-                
                 <div>
                     <h4>My Movie Collection</h4>
                     <hr/>
@@ -47,13 +46,3 @@ function MyMoviesCMP(props){
 }
 
 export default MyMoviesCMP;
-
-/*
-<div className="mb-4">
-                    <h4 className="text-warning">Recommendations</h4>
-                    <hr/>
-                    <div className="empty-box">
-                        Keep adding movies to get Recommendations
-                    </div>
-                </div>
-                */
