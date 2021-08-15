@@ -7,6 +7,7 @@ import ImageDisplay from "./ImageDisplay";
 const MovieDetailsCMP =function(props){
 
     const [showDetails,setShowDetails]=useState(false);
+    const [isRated,setIsRated]=useState(props.result.rating!=null);
     const [resultsState,setResultsState]=useState({
         isLoading:true,
         details:[],
@@ -48,6 +49,7 @@ const MovieDetailsCMP =function(props){
     }
 
     const removeFromCollection=()=>{
+        setIsRated(false);
         deleteData(props.user.user.uid,props.firestoreID)
         .catch((error)=>{
             console.log(error);
@@ -55,6 +57,7 @@ const MovieDetailsCMP =function(props){
     }
 
     const addToCollection=()=>{
+        setIsRated(true);
         const newItem={
             rating:1,
             id:props.result.id,
@@ -71,7 +74,7 @@ const MovieDetailsCMP =function(props){
     if(!showDetails){
         return(
             <div>
-                <div className={props.result.rating?"results-grid-item-liked details-button-parent":"results-grid-item details-button-parent"} key={props.result.id}>
+                <div className={isRated?"results-grid-item-liked details-button-parent":"results-grid-item details-button-parent"} key={props.result.id}>
                     <div className=" p-2 ">
                         <p className="text-center mb-2">
                             {props.result.title} 
@@ -146,19 +149,19 @@ const MovieDetailsCMP =function(props){
                     {props.user.isLoggedIn && (
                         <div className="mx-auto mb-2">
                             
-                            {props.rating===0?(
-                                <div className="cursor-pointer">
-                                    <svg width="30" height="32" viewBox="0 0 30 32" fill="none" xmlns="http://www.w3.org/2000/svg" className="heart-svg"  onClick={addToCollection}>
-                                    <path id="heart" d="M15.6124 5.55276C8.01243 -3.24724 2.11243 2.55276 1.11243 7.55275C0.112426 12.5527 6.11243 20.0527 6.11243 20.0527L15.6124 31.0527L25.1124 20.0527C25.1124 20.0527 32 14 28.1124 5.05276C24.2249 -3.89449 15.6124 5.55276 15.6124 5.55276Z"  stroke="#B10E0E"/>
-                                    </svg>
-                                    <p className="text-center mb-0" onClick={addToCollection}>Add to favourites</p>
-                                </div>
-                            ):(
+                            {isRated?(
                                 <div className="cursor-pointer">
                                     <svg width="30" height="32" viewBox="0 0 30 32" fill="none" xmlns="http://www.w3.org/2000/svg" className="heart-svg" onClick={removeFromCollection}>
                                     <path id="heart" d="M15.6124 5.55276C8.01243 -3.24724 2.11243 2.55276 1.11243 7.55275C0.112426 12.5527 6.11243 20.0527 6.11243 20.0527L15.6124 31.0527L25.1124 20.0527C25.1124 20.0527 32 14 28.1124 5.05276C24.2249 -3.89449 15.6124 5.55276 15.6124 5.55276Z" fill="#CC3F3F" stroke="#B10E0E"/>
                                     </svg>
                                     <p className="text-center mb-0" onClick={removeFromCollection}>Remove from favourites</p>
+                                </div>
+                            ):(
+                                <div className="cursor-pointer">
+                                    <svg width="30" height="32" viewBox="0 0 30 32" fill="none" xmlns="http://www.w3.org/2000/svg" className="heart-svg"  onClick={addToCollection}>
+                                    <path id="heart" d="M15.6124 5.55276C8.01243 -3.24724 2.11243 2.55276 1.11243 7.55275C0.112426 12.5527 6.11243 20.0527 6.11243 20.0527L15.6124 31.0527L25.1124 20.0527C25.1124 20.0527 32 14 28.1124 5.05276C24.2249 -3.89449 15.6124 5.55276 15.6124 5.55276Z"  stroke="#B10E0E"/>
+                                    </svg>
+                                    <p className="text-center mb-0" onClick={addToCollection}>Add to favourites</p>
                                 </div>
                             )
                             }
