@@ -48,8 +48,6 @@ class MainCMP extends Component{
         this.setState({modalShow:!this.state.modalShow});
     }
 
-    //enter to search
-
     render(){
         return(
             <div>
@@ -59,21 +57,13 @@ class MainCMP extends Component{
                         handleSearch={this.props.searchMoviesAction}
                         toggleModal={this.toggleModal}
                         user={this.props.user}
-                        addMovie={this.props.addMovie}
-                        removeMovie={this.props.removeMovie}
-                        updateMovie={this.props.updateMovie}
                         movies={this.props.movies}
                         popular={this.props.popular}/>}/>
-                    {this.props.user.isLoggedIn &&<Route path ="/mymovies" component={()=><MyMoviesCMP user={this.props.user} movies={this.props.movies}
-                        addMovie={this.props.addMovie}
-                        removeMovie={this.props.removeMovie}
-                        updateMovie={this.props.updateMovie}/>}></Route>}
-                    <Route  path="/results" component={({match})=><ResultsCMP 
-                        searchName={match.params.movieName} 
+                    {this.props.user.isLoggedIn &&<Route path ="/mymovies" component={()=><MyMoviesCMP 
+                        user={this.props.user} 
+                        movies={this.props.movies}/>}></Route>}
+                    <Route  path="/results" component={({match})=><ResultsCMP
                         user={this.props.user}
-                        addMovie={this.props.addMovie}
-                        removeMovie={this.props.removeMovie}
-                        updateMovie={this.props.updateMovie}
                         results={this.props.results}
                         handleSearch={this.props.searchMoviesAction}
                         movies={this.props.movies}/>}/>

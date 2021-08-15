@@ -1,5 +1,5 @@
 
-import {useState, useEffect } from "react";
+import {useState,useRef } from "react";
 import { getMovieDetails } from "../requests/getMovieDetails";
 import {addData,deleteData} from "../firebase/fireStore";
 import ImageDisplay from "./ImageDisplay";
@@ -7,25 +7,20 @@ import ImageDisplay from "./ImageDisplay";
 const MovieDetailsCMP =function(props){
 
     const [showDetails,setShowDetails]=useState(false);
-    //const [isLiked,set]
     const [resultsState,setResultsState]=useState({
         isLoading:true,
         details:[],
         error:null
     });
 
+    const detailsRef=useRef(null);
+
     const handleClick=()=>{
-        if(props.movieID){
-            getDetails(props.movieID);
+        if(props.result.id){
+            getDetails(props.result.id);
         }
         setShowDetails(true);
     };
-
-    /*useEffect(()=>{
-        if(props.movieID){
-            getDetails(props.movieID);
-        }
-    },[props.movieID]);*/
 
     const getDetails=(movieID)=>{
         setResultsState({
@@ -62,47 +57,44 @@ const MovieDetailsCMP =function(props){
     const addToCollection=()=>{
         const newItem={
             rating:1,
-            id:props.movieID,
+            id:props.result.id,
             resultType:"Title",
-            image:resultsState.details.image,
-            title:props.title,
-            description:resultsState.details.fullTitle
+            image:props.result.image,
+            title:props.result.title
         };
         addData(props.user.user.uid,newItem)
         .catch((error)=>{
             console.log(error);
         });
-
-        //props.addToCollection(newItem)
-        
-        /*addData(props.user.user.uid,newItem)
-        .then((docRefId)=>{
-            console.log("add");
-            //newItem.firestoreID=docRefId;
-            //props.addMovie(newItem);
-        })
-        .catch((error)=>{
-            console.log(error);
-        });*/
     }
-
-    /*const removeFromCollection=()=>{
-        deleteData(props.user.user.uid,props.firestoreID)
-        .catch((error)=>{
-            console.log(error);
-        });
-    }*/
-    
     
     if(!showDetails){
         return(
             <div>
-                <div className={props.result.rating?"results-grid-item-liked":"results-grid-item"} key={props.result.id} onClick={handleClick}>
-                    <div className=" p-2">
-                    <p className="text-center mb-2">
-                        {props.result.title}
-                    </p>
-                    <ImageDisplay src={props.result.image} alt={props.result.title} text={props.result.description|| props.result.title}/>
+                <div className={props.result.rating?"results-grid-item-liked details-button-parent":"results-grid-item details-button-parent"} key={props.result.id}>
+                    <div className=" p-2 ">
+                        <p className="text-center mb-2">
+                            {props.result.title} 
+                        </p>
+                        {props.user.isLoggedIn && (
+                            <div className="mx-auto mb-2 cursor-pointer heart-grid">
+                            {props.rating===0?(
+                                
+                                    <svg width="25" height="25" viewBox="0 0 30 32" fill="none" xmlns="http://www.w3.org/2000/svg" className="heart-svg"  onClick={addToCollection}>
+                                    <path id="heart" d="M15.6124 5.55276C8.01243 -3.24724 2.11243 2.55276 1.11243 7.55275C0.112426 12.5527 6.11243 20.0527 6.11243 20.0527L15.6124 31.0527L25.1124 20.0527C25.1124 20.0527 32 14 28.1124 5.05276C24.2249 -3.89449 15.6124 5.55276 15.6124 5.55276Z"  stroke="#B10E0E"/>
+                                    </svg>
+                            ):(
+                                    <svg width="25" height="25" viewBox="0 0 30 32" fill="none" xmlns="http://www.w3.org/2000/svg" className="heart-svg" onClick={removeFromCollection}>
+                                    <path id="heart" d="M15.6124 5.55276C8.01243 -3.24724 2.11243 2.55276 1.11243 7.55275C0.112426 12.5527 6.11243 20.0527 6.11243 20.0527L15.6124 31.0527L25.1124 20.0527C25.1124 20.0527 32 14 28.1124 5.05276C24.2249 -3.89449 15.6124 5.55276 15.6124 5.55276Z" fill="#CC3F3F" stroke="#B10E0E"/>
+                                    </svg>
+                            )
+                            }
+                            </div>
+                        )}
+                        <ImageDisplay src={props.result.image} alt={props.result.title} text={props.result.description|| props.result.title}/>
+                        <div className="details-button" onClick={handleClick}>
+                            Details
+                        </div>
                     </div>
                 </div>
             </div>
@@ -111,15 +103,17 @@ const MovieDetailsCMP =function(props){
     else{
         if(resultsState.isLoading){
             return(
-            <div>
-                Loading
+            <div className="results-grid-item text-center">
+                <div className="spinner-border text-primary mx-auto d-block mt-4" role="status">
+                    <span className="visually-hidden">Loading...</span>
+                </div>
             </div>
             );
         }
         else if(resultsState.error){
             return(
-                <div>
-                    Error
+                <div className="results-grid-item text-center text-danger">
+                Error
                 </div>
             );
         }
@@ -142,10 +136,10 @@ const MovieDetailsCMP =function(props){
             });
 
             return(
-                <div className="col-12 justify-content-center " key={props.movieID+"d"}>
+                <div className="col-12 justify-content-center " key={props.result.id+"d"} ref={detailsRef}>
                     <div className="text-end"><span className="badge bg-danger" style={{cursor:"pointer"}} onClick={()=>setShowDetails(false)}>X</span></div>
                     <div className="movie-details">
-                    <h4 className="text-center">{props.title}</h4>
+                    <h4 className="text-center">{resultsState.details.title}</h4>
                     <p className="text-center">{genres}</p>
                     <p className="text-center" style={{color:"#EDC01F"}}>{resultsState.details.awards}</p>
 
@@ -173,7 +167,7 @@ const MovieDetailsCMP =function(props){
 
                     <div className="row">
                         <div className="col-md-4">
-                            <img src={resultsState.details.image} alt={props.title} className="w-100"/>
+                            <img src={resultsState.details.image} alt={resultsState.details.title} className="w-100"/>
                             Rating <span className="badge bg-danger text-light">{resultsState.details.contentRating} </span> 
                             , IMDB <span className="badge bg-warning text-dark">{resultsState.details.imDbRating}</span>
                         </div>

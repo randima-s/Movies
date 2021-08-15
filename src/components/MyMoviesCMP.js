@@ -29,15 +29,16 @@ function MyMoviesCMP(props){
                 <div>
                     <h4>My Movie Collection</h4>
                     <hr/>
-                    <ResultGridCMP 
-                    movies={props.movies}
-                    isLoading={props.movies.isLoading} 
-                    error={props.movies.error} 
-                    results={props.movies.movies} 
-                    user={props.user}
-                    addMovie={props.addMovie}
-                    removeMovie={props.removeMovie}
-                    updateMovie={props.updateMovie}/>
+                    {props.movies.movies.length>0?(
+                        <ResultGridCMP 
+                        movies={props.movies}
+                        results={props.movies} 
+                        user={props.user}/>
+                    ):(
+                        <div className="text-center">
+                            <p>Empty</p>
+                        </div>
+                    )}
                 </div>
             </div>
             </div>

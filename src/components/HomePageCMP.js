@@ -32,10 +32,7 @@ function HomePageCMP(props){
             <PopularMoviesCMP
             popular={props.popular} 
             user={props.user}
-            movies={props.movies}
-            addMovie={props.addMovie}
-            removeMovie={props.removeMovie}
-            updateMovie={props.updateMovie}/>
+            movies={props.movies}/>
         </div>
         </div>
     );

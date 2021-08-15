@@ -3,23 +3,6 @@ import ResultGridCMP from "./ResultGridCMP";
 
 function PopularMoviesCMP(props){
 
-    /*useEffect(()=>{
-        injectUserCollectionData(props.popular.movies);
-    },[props.movies.movies,props.popular.movies]);*/
-
-    //should be moved to backend
-    /*const injectUserCollectionData=(popularMovies)=>{
-        if(props.user.isLoggedIn && !props.movies.isLoading && !props.movies.error){
-            const modifiedResults=popularMovies.map((movie)=>{
-                return props.movies.movies.find((userMovie)=>userMovie.id===movie.id)||movie;
-            });
-            setModifiedResults(modifiedResults);
-        }
-        else{
-            setModifiedResults(popularMovies);
-        }
-    }*/
-
     return(
         <div>
             <div className="movies-nav-filler">
@@ -32,13 +15,8 @@ function PopularMoviesCMP(props){
                 </h1>
                 <ResultGridCMP 
                     movies={props.movies}
-                    isLoading={props.popular.isLoading} 
-                    error={props.popular.error} 
-                    results={props.popular.movies} 
+                    results={props.popular} 
                     user={props.user}
-                    addMovie={props.addMovie}
-                    removeMovie={props.removeMovie}
-                    updateMovie={props.updateMovie}
                 />
                 </div>
             </div>

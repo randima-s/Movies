@@ -1,33 +1,13 @@
-import {useState,useEffect,useRef} from "react";
-import {addData,deleteData} from "../firebase/fireStore";
+import {useState,useRef} from "react";
 import MovieDetailsCMP from "./MovieDetailsCMP";
-import ImageDisplay from "./ImageDisplay";
 import Pagination from "./Pagination";
 
 function ResultGridCMP(props){
 
-    const [selectedMovie,setSelectedMovie]=useState(null);
-    const [currentPage,setCurrentPage]=useState(0);
-    const [pageCount,setPageCount]=useState(1);
-    const [displayedResults,setDisplayedResults]=useState([]);
-    //const [testState,setTestState] =useState(false);
+    const [currentPage,setCurrentPage]=useState(1);
+    const pageCount=Math.ceil(props.results.movies.length/12);
 
     const detailsRef=useRef(null);
-
-    useEffect(()=>{
-        setCurrentPage(1);
-        setPageCount(Math.ceil(props.results.length/12));
-        setDisplayedResults(props.results.slice(12*(currentPage-1),12*currentPage));
-    },[props.results]);
-
-    //useEffect(()=>{
-
-        //setDisplayedResults(displayedResults_);
-    //},[props.results]);
-
-    const handleDetails=(movieID)=>{
-        setSelectedMovie(movieID);
-    }
 
     const incPage=()=>{
         if(currentPage<pageCount){
@@ -41,40 +21,30 @@ function ResultGridCMP(props){
         }
     }
 
-    //Add Remove from Collection
-    /*const removeFromCollection=(firestoreID)=>{
-        deleteData(props.user.user.uid,firestoreID)
-        .catch((error)=>{
-            console.log(error);
-        });
-    }
-
-    const addToCollection=(newItem)=>{
-        addData(props.user.user.uid,newItem)
-        .catch((error)=>{
-            console.log(error);
-        });
-    }*/
-
-    //////////////////////////////
-
-    if(props.isLoading){
+    if(props.results.isLoading){
         return(
-            <div className="text-light">
+            <div className="results-grid-item">
+                <br/>
+                <svg width="120" height="8" viewBox="0 0 120 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g id="loadingbar">
+                <rect width="120" height="8" fill="none"/>
+                <circle id="loadicon" cx="3" cy="4" r="4" fill="#27A4FF"/>
+                </g>
+                </svg>
+                <br/>
                 Loading
             </div>
         );
     }
-    else if(props.error){
+    else if(props.results.error){
         return(
             <div className="text-danger">
-                error
+                Error : {props.results.error}
             </div>
         );
     }
     else {
-
-        let displayedResults_=props.results.slice(12*(currentPage-1),12*currentPage);
+        let displayedResults_=props.results.movies.slice(12*(currentPage-1),12*currentPage);
         if( props.user.isLoggedIn && !props.movies.error &&  props.movies.movies.length>0 && displayedResults_.length>0){
             console.log("injecting");
             displayedResults_=displayedResults_.map((movie)=>{
@@ -84,31 +54,15 @@ function ResultGridCMP(props){
         }
 
         const results=displayedResults_.map((result)=>{
-            //if(selectedMovie===result.id){
-                return(
-                    <div ref={detailsRef}>
-                    <MovieDetailsCMP movieID={result.id} title={result.title} description={result.description} 
-                    firestoreID={result.firestoreID||null}
-                    handleClose={()=>handleDetails(null)}
-                    user={props.user}
-                    rating={result.rating ||0}
-                    result={result}/>
-                    </div>
-                );
-            //}
-            /*else{
-                return(
-                    <div className={result.rating?"results-grid-item-liked":"results-grid-item"} key={result.id} onClick={()=>handleDetails(result.id)}>
-                        <div className=" p-2">
-                        <p className="text-center mb-2">
-                            {result.title}
-                        </p>
-                        <ImageDisplay src={result.image} alt={result.title} text={result.description|| result.title}/>
-                        </div>
-                    </div>
-                    
-                );
-            }*/
+            return(
+                <div ref={detailsRef} key={result.id}>
+                <MovieDetailsCMP 
+                firestoreID={result.firestoreID||null}
+                user={props.user}
+                rating={result.rating ||0}
+                result={result}/>
+                </div>
+            );
         });
 
         return(

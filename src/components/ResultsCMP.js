@@ -19,14 +19,9 @@ function ResultsCMP(props){
                 </div>
                 <div className="text-light results-grid">
                 <ResultGridCMP 
-                    movies={props.movies}    
-                    isLoading={props.results.isLoading} 
-                    error={props.results.error} 
-                    results={props.results.results} 
+                    movies={props.movies}
+                    results={props.results} 
                     user={props.user}
-                    addMovie={props.addMovie}
-                    removeMovie={props.removeMovie}
-                    updateMovie={props.updateMovie}
                 />
                 </div>
             </div>
